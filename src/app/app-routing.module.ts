@@ -6,7 +6,9 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'baby-tracker', loadChildren: './baby-tracker/baby-tracker.module#BabyTrackerPageModule' },
   { path: 'baby-memory', loadChildren: './baby-memory/baby-memory.module#BabyMemoryPageModule' },
-  { path: 'baby-recipes', loadChildren: './baby-recipes/baby-recipes.module#BabyRecipesPageModule' }
+  { path: 'baby-recipes', loadChildren: './baby-recipes/baby-recipes.module#BabyRecipesPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
+  { path: 'register', loadChildren: './register/register.module#RegisterPageModule' }
 ];
 @NgModule({
   imports: [

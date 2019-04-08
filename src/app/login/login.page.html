@@ -1,0 +1,22 @@
+<ion-content >
+  <h1>BabyBoss Login</h1>
+  <form  [formGroup]="login" (submit)="emailLogin(login.value)">
+  <ion-list class="form-list">
+    <ion-item class="email">
+      <ion-label color="primary" stacked>Your Email</ion-label>
+      <ion-input  type="email" formControlName="email" clearInput></ion-input>
+    </ion-item>
+    <ion-item class="password">
+      <ion-label color="primary" stacked>Your Password</ion-label>
+      <ion-input type="password" formControlName="password" clearInput></ion-input>
+    </ion-item>
+  
+    <ion-button ion-button block color="primary"  type="submit" [disabled]="!login.valid">Login</ion-button>
+  </ion-list>
+  </form>
+  <label class="error-message">{{errorMessage}}</label>
+      <button ion-button outline color="danger" round icon-start item-start routerLink="/register">
+          <ion-icon name='person-add'></ion-icon>
+        Register
+      </button>
+</ion-content>
