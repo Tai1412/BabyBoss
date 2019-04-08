@@ -1,6 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+
 import { TabsPage } from './tabs.page';
+import { HomePage } from '../home/home.page';
+import { BabyTrackerPage } from '../baby-tracker/baby-tracker.page';
+import { BabyRecipesPage } from '../baby-recipes/baby-recipes.page';
+import { BabyMemoryPage } from '../baby-memory/baby-memory.page';
 
 const routes: Routes = [
   {
@@ -8,42 +13,51 @@ const routes: Routes = [
     component: TabsPage,
     children: [
       {
-        path: 'tab1',
+        path: 'home',
         children: [
           {
             path: '',
-            loadChildren: '../tab1/tab1.module#Tab1PageModule'
+            loadChildren: '../home/home.module#HomePageModule'
           }
         ]
       },
       {
-        path: 'tab2',
+        path: 'baby-tracker',
         children: [
           {
             path: '',
-            loadChildren: '../tab2/tab2.module#Tab2PageModule'
+            loadChildren: '../baby-tracker/baby-tracker.module#BabyTrackerPageModule'
           }
         ]
       },
       {
-        path: 'tab3',
+        path: 'baby-recipes',
         children: [
           {
             path: '',
-            loadChildren: '../tab3/tab3.module#Tab3PageModule'
+            loadChildren: '../baby-recipes/baby-recipes.module#BabyRecipesPageModule'
+          }
+        ]
+      },
+      {
+        path: 'baby-memory',
+        children: [
+          {
+            path: '',
+            loadChildren: '../baby-memory/baby-memory.module#BabyMemoryPageModule'
           }
         ]
       },
       {
         path: '',
-        redirectTo: '/tabs/tab1',
+        redirectTo: '/tabs/home',
         pathMatch: 'full'
       }
     ]
   },
   {
     path: '',
-    redirectTo: '/tabs/tab1',
+    redirectTo: '/tabs/home',
     pathMatch: 'full'
   }
 ];
