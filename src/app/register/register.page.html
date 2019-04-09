@@ -1,9 +1,37 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>register</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button  defaultHref="login"></ion-back-button>
+    </ion-buttons>
+    <ion-title><h1>BabyBoss Register</h1></ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+  <form [formGroup]="signupForm" (submit)="emailSignup(signupForm.value)">
+  <ion-list class="form-list">
+    <ion-item class="email">
+      <ion-label color="primary" stacked>Your Email</ion-label>
+      <ion-input type="email" formControlName="email" clearInput></ion-input>
+    </ion-item>
+    <div>
+      <ng-container *ngFor="let validation of validation_messages.email">
+        <div class="error-message" *ngIf="signupForm.get('email').hasError(validation.type) && (signupForm.get('email').dirty || signupForm.get('email').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    </div>
+      <ion-item class="password">
+        <ion-label color="primary" stacked>Your Password</ion-label>
+        <ion-input type="password" formControlName="password" clearInput></ion-input>
+      </ion-item>
+      <ng-container *ngFor="let validation of validation_messages.password">
+        <div class="error-message" *ngIf="signupForm.get('password').hasError(validation.type) && (signupForm.get('password').dirty || signupForm.get('password').touched)">
+          {{ validation.message }}
+        </div>
+      </ng-container>
+    <ion-button ion-button block type="submit" [disabled]="!signupForm.valid">SIGN UP</ion-button>
+  </ion-list>
+  </form>
+  <ion-label class="error-message">{{errorMessage}}</ion-label>
 </ion-content>

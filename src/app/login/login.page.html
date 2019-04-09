@@ -15,8 +15,8 @@
   </ion-list>
   </form>
   <label class="error-message">{{errorMessage}}</label>
-      <button ion-button outline color="danger" round icon-start item-start routerLink="/register">
+      <ion-button ion-button outline color="danger" round icon-start item-start [routerLink]="'/register/'" routerDirection="forward">
           <ion-icon name='person-add'></ion-icon>
         Register
-      </button>
+      </ion-button>
 </ion-content>
