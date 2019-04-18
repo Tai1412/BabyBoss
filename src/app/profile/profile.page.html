@@ -1,12 +1,32 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>profile</ion-title>
+    <ion-buttons slot="end" [hidden]="!profile_form.dirty || !profile_form.valid">
+      <ion-button ion-button (click)="saveUserProfiles(profile_form.value)">
+        SAVE
+      </ion-button>
+    </ion-buttons><ion-title>SETTING</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <button ion-button color="sand" block icon-start (click)="logout()">
+  <form [formGroup]="profile_form">
+    <ion-list>
+      <ion-item>
+        <ion-label stacked>Your Name</ion-label>
+        <ion-input type="text" formControlName="name"></ion-input>
+      </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.name">
+          <div class="error-message" *ngIf="profile_form.get('name').hasError(validation.type) && (profile_form.get('name').dirty || profile_form.get('name').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
+    </ion-list>
+  </form>
+
+  <ion-button ion-button color="primary" block icon-start (click)="logout()">
     <ion-icon name="log-out"></ion-icon>
     Log out
-  </button>
+  </ion-button>
 </ion-content>
