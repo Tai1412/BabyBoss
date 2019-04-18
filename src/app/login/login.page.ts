@@ -31,7 +31,7 @@ export class LoginPage implements OnInit {
   emailLogin(userValue){
     this.fAuthService.emailLogin(userValue)
     .then(res =>{
-      this.router.navigate(['./tabs/home']);  
+      this.router.navigate(['/tabs']);  
       this.login.reset();
     }, err => this.errorMessage = err.message)
   }

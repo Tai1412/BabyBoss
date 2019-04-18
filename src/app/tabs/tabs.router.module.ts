@@ -6,6 +6,7 @@ import { HomePage } from '../home/home.page';
 import { BabyTrackerPage } from '../baby-tracker/baby-tracker.page';
 import { BabyRecipesPage } from '../baby-recipes/baby-recipes.page';
 import { BabyMemoryPage } from '../baby-memory/baby-memory.page';
+import {ProfilePage} from '../profile/profile.page';
 
 const routes: Routes = [
   {
@@ -45,6 +46,15 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../baby-memory/baby-memory.module#BabyMemoryPageModule'
+          }
+        ]
+      },
+      {
+        path: 'profile',
+        children: [
+          {
+            path: '',
+            loadChildren: '../profile/profile.module#ProfilePageModule'
           }
         ]
       },
