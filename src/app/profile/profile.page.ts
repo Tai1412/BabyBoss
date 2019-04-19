@@ -33,7 +33,7 @@ export class ProfilePage implements OnInit {
       name:new FormControl('',Validators.required)
     });
   }
-  ionViewWillLoad(){
+  ionViewWillEnter(){
     this.afAuthService.getCurrentUser()
     .then(user=>{
       this.user=user;
