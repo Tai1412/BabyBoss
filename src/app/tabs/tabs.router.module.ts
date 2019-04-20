@@ -55,6 +55,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../profile/profile.module#ProfilePageModule'
+          },
+          {
+            path: 'terms-and-condition',
+            loadChildren: '../profile/terms-and-condition/terms-and-condition.module#TermsAndConditionPageModule'
           }
         ]
       },
