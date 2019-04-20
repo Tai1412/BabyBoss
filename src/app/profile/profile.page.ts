@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {AuthenticationService} from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-profile',
@@ -22,7 +23,8 @@ export class ProfilePage implements OnInit {
   };
   constructor(
     public afAuthService: AuthenticationService,
-    public router:Router
+    public router:Router,
+    public toastCtrl:ToastController
     ) 
     { 
   
@@ -49,16 +51,25 @@ export class ProfilePage implements OnInit {
   saveUserProfiles(value){
     this.afAuthService.updateUserProfiles(value)
     .then(res => {
-      console.log(res);
+      this.showToast("Update Successfuly");
     }, err => console.log(err))
   }
   logout(){
     this.afAuthService.logout()
     .then((res) => {
       this.router.navigate(['/login']);//log out to previous navigation
+      this.showToast("LogOut Successfully");
     }, (error) => {
       console.log("Logout error", error);
     });
+  }
+
+  async showToast(message){
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 

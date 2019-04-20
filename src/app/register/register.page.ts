@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import {AuthenticationService} from '../services/authentication.service';
 import { Router } from '@angular/router';
+import {ToastController} from '@ionic/angular';
 
 @Component({
   selector: 'app-register',
@@ -26,7 +27,8 @@ export class RegisterPage implements OnInit {
   };
   constructor(
     public fAuthService: AuthenticationService,
-    public router:Router
+    public router:Router,
+    public toastCtrl:ToastController
   ) { }
 
   ngOnInit() {
@@ -42,9 +44,18 @@ export class RegisterPage implements OnInit {
       this.fAuthService.emailLogin(userValue)
       .then(res => {
         this.router.navigate(['/tabs']); 
+        this.showToast("Register Successfully");
         this.signupForm.reset();
       }, error => this.errorMessage = error.message)
     }, error => this.errorMessage = error.message)
+  }
+
+  async showToast(message){
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

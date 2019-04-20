@@ -31,9 +31,18 @@ export class LoginPage implements OnInit {
   emailLogin(userValue){
     this.fAuthService.emailLogin(userValue)
     .then(res =>{
-      this.router.navigate(['/tabs']);  
+      this.router.navigate(['/tabs']);
+      this.showToast("Welcome Back");  
       this.login.reset();
     }, err => this.errorMessage = err.message)
+  }
+
+  async showToast(message){
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }
