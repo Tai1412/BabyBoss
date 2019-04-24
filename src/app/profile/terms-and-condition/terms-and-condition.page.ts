@@ -15,5 +15,4 @@ export class TermsAndConditionPage implements OnInit {
     this.TACService.getTermsAndCondition()
     .subscribe(data=>this.termsAndConditions=data)
   }
-
 }

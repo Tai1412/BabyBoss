@@ -19,6 +19,18 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../home/home.module#HomePageModule'
+          },
+          {
+            path:'tips-for-dad',
+            loadChildren:'../home/tips-for-dad/tips-for-dad.module#TipsForDadPageModule'
+          },
+          {
+            path:'tips-for-mom',
+            loadChildren:'../home/tips-for-mom/tips-for-mom.module#TipsForMomPageModule'
+          },
+          {
+            path:'baby-tips',
+            loadChildren:'../home/baby-tips/baby-tips.module#BabyTipsPageModule'
           }
         ]
       },
