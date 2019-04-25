@@ -22,7 +22,16 @@ const routes: Routes = [
           },
           {
             path:'tips-for-dad',
-            loadChildren:'../home/tips-for-dad/tips-for-dad.module#TipsForDadPageModule'
+            children:[
+              {
+                path:'',
+                loadChildren:'../home/tips-for-dad/tips-for-dad.module#TipsForDadPageModule'
+              },
+              {
+                path:'tips-for-dad-detail/:id',
+                loadChildren:'../home/tips-for-dad/tips-for-dad-detail/tips-for-dad-detail.module#TipsForDadDetailPageModule'
+              }
+          ]
           },
           {
             path:'tips-for-mom',

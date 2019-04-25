@@ -1,0 +1,14 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-title>{{ (tips | async)?.title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <h3> Album </h3>
+    <p>
+      It was part of the {{ (tips | async)?.content }} album.
+    </p>
+  
+  
+</ion-content>
