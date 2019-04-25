@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { BabyTipsServiceService } from './baby-tips-service.service';
 
 @Component({
   selector: 'app-baby-tips',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./baby-tips.page.scss'],
 })
 export class BabyTipsPage implements OnInit {
-
-  constructor() { }
+  public babyTips;
+  constructor(
+    private firebaseService:BabyTipsServiceService
+  ) { }
 
   ngOnInit() {
+    this.babyTips=this.firebaseService.getBabyTips();
   }
 
 }

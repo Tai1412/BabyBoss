@@ -3,10 +3,17 @@
       <ion-buttons slot="start">
           <ion-back-button  defaultHref="/tabs/home"></ion-back-button>
     </ion-buttons>
-    <ion-title>baby-tips</ion-title>
+    <ion-title>tips-for-baby</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-
+    <ion-card *ngFor="let tipForBaby of babyTips | async" routerLink="/tabs/home/baby-tips/baby-tips-detail/{{tipForBaby.id}}">
+      <ion-card-header>
+        {{ tipForBaby.title }}
+      </ion-card-header>
+      <ion-card-content>
+        Artist Name: {{ tipForBaby.content }}
+      </ion-card-content>
+    </ion-card>
 </ion-content>

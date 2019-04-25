@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TipsForMomServiceService } from './tips-for-mom-service.service';
 
 @Component({
   selector: 'app-tips-for-mom',
@@ -6,10 +7,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./tips-for-mom.page.scss'],
 })
 export class TipsForMomPage implements OnInit {
-
-  constructor() { }
+  public tipsForMom;
+  constructor(
+    private firebaseService:TipsForMomServiceService
+  ) { }
 
   ngOnInit() {
+    this.tipsForMom=this.firebaseService.getTipsForMom();
   }
 
 }

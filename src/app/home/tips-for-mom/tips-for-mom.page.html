@@ -8,5 +8,12 @@
 </ion-header>
 
 <ion-content>
-
+    <ion-card *ngFor="let tipForMom of tipsForMom | async" routerLink="/tabs/home/tips-for-mom/tips-for-mom-detail/{{tipForMom.id}}">
+      <ion-card-header>
+        {{ tipForMom.title }}
+      </ion-card-header>
+      <ion-card-content>
+        Artist Name: {{ tipForMom.content }}
+      </ion-card-content>
+    </ion-card>
 </ion-content>

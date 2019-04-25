@@ -35,11 +35,29 @@ const routes: Routes = [
           },
           {
             path:'tips-for-mom',
-            loadChildren:'../home/tips-for-mom/tips-for-mom.module#TipsForMomPageModule'
+            children:[
+              {
+                path:'',
+                loadChildren:'../home/tips-for-mom/tips-for-mom.module#TipsForMomPageModule'
+              },
+              {
+                path:'tips-for-mom-detail/:id',
+                loadChildren:'../home/tips-for-mom/tips-for-mom-detail/tips-for-mom-detail.module#TipsForMomDetailPageModule'
+              }
+          ]
           },
           {
             path:'baby-tips',
-            loadChildren:'../home/baby-tips/baby-tips.module#BabyTipsPageModule'
+            children:[
+              {
+                path:'',
+                loadChildren:'../home/baby-tips/baby-tips.module#BabyTipsPageModule'
+              },
+              {
+                path:'baby-tips-detail/:id',
+                loadChildren:'../home/baby-tips/baby-tips-detail/baby-tips-detail.module#BabyTipsDetailPageModule'
+              }
+          ]
           }
         ]
       },
