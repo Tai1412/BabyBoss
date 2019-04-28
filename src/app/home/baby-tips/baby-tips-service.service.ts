@@ -10,6 +10,14 @@ export class BabyTipsServiceService {
     public afs:AngularFirestore
   ) { }
   getBabyTips(){
-    return this.afs.collection('tips').doc("e4iwSiy3N8NWUjZeduZh").collection("babyTips").valueChanges();
-}
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('tips').doc("e4iwSiy3N8NWUjZeduZh").collection("babyTips").snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots);
+      })
+    });
+  }
+  getBabyTipsDetail(tipId: string) {
+    return this.afs.collection('tips').doc("e4iwSiy3N8NWUjZeduZh").collection("babyTips").doc(tipId).valueChanges();
+  }
 }

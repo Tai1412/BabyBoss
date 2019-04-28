@@ -28,7 +28,7 @@ const routes: Routes = [
                 loadChildren:'../home/tips-for-dad/tips-for-dad.module#TipsForDadPageModule'
               },
               {
-                path:'tips-for-dad-detail/:id',
+                path:':id',
                 loadChildren:'../home/tips-for-dad/tips-for-dad-detail/tips-for-dad-detail.module#TipsForDadDetailPageModule'
               }
           ]
@@ -41,7 +41,7 @@ const routes: Routes = [
                 loadChildren:'../home/tips-for-mom/tips-for-mom.module#TipsForMomPageModule'
               },
               {
-                path:'tips-for-mom-detail/:id',
+                path:':id',
                 loadChildren:'../home/tips-for-mom/tips-for-mom-detail/tips-for-mom-detail.module#TipsForMomDetailPageModule'
               }
           ]
@@ -54,7 +54,7 @@ const routes: Routes = [
                 loadChildren:'../home/baby-tips/baby-tips.module#BabyTipsPageModule'
               },
               {
-                path:'baby-tips-detail/:id',
+                path:':id',
                 loadChildren:'../home/baby-tips/baby-tips-detail/baby-tips-detail.module#BabyTipsDetailPageModule'
               }
           ]

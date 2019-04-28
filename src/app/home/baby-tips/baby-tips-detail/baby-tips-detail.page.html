@@ -1,9 +1,18 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>baby-tips-detail</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button  defaultHref="tabs/home/baby-tips"></ion-back-button>
+          </ion-buttons>
+        <ion-title>{{tip.title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <h3> Content </h3>
+      <p>
+         {{tip.content}}
+      </p>
+    
+    
+  </ion-content>
+  

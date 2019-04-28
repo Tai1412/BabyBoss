@@ -1,13 +1,16 @@
 <ion-header>
   <ion-toolbar>
-      <ion-title>{{ (tips | async)?.title }}</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/home/tips-for-dad"></ion-back-button>
+    </ion-buttons>
+      <ion-title>{{ tip.title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <h3> Album </h3>
+    <h3> Content </h3>
     <p>
-      It was part of the {{ (tips | async)?.content }} album.
+      {{ tip.content }}
     </p>
   
   

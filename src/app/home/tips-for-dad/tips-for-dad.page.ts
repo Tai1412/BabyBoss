@@ -7,13 +7,15 @@ import { TipsForDadServiceService } from './tips-for-dad-service.service';
   styleUrls: ['./tips-for-dad.page.scss'],
 })
 export class TipsForDadPage implements OnInit {
-  public tipsForDad;
+  public tipsForDad:Array<any>=[];
   constructor(
     private firebaseService:TipsForDadServiceService
   ) { }
 
   ngOnInit() {
-    this.tipsForDad=this.firebaseService.getTipsForDad().valueChanges();
+    this.firebaseService.getTipsForDad().then(data=>{
+      this.tipsForDad=data;
+    });
   }
 
 }

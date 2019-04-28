@@ -7,13 +7,15 @@ import { BabyTipsServiceService } from './baby-tips-service.service';
   styleUrls: ['./baby-tips.page.scss'],
 })
 export class BabyTipsPage implements OnInit {
-  public babyTips;
+  public babyTips:Array<any>=[];
   constructor(
     private firebaseService:BabyTipsServiceService
   ) { }
 
   ngOnInit() {
-    this.babyTips=this.firebaseService.getBabyTips();
+    this.firebaseService.getBabyTips().then(data=>{
+      this.babyTips=data;
+    });  
   }
 
 }
