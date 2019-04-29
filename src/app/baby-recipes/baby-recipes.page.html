@@ -1,9 +1,20 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>baby-recipes</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content>
-
-</ion-content>
+    <ion-toolbar>
+      <ion-title>Baby Recipes List</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <ion-content>
+      <ion-card *ngFor="let babyRecipe of babyRecipes" routerLink="/tabs/baby-recipes/{{babyRecipe.payload.doc.id}}">
+        <ion-card-header>
+          {{babyRecipe.payload.doc.data().title}}
+        </ion-card-header>
+        <ion-card-content>
+          Brief content:{{babyRecipe.payload.doc.data().content}}
+        </ion-card-content>
+        <ion-card-content>
+           Time:{{babyRecipe.payload.doc.data().time}}
+        </ion-card-content>
+      </ion-card>
+  </ion-content>
+  
