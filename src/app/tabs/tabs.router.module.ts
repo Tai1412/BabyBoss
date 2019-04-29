@@ -76,6 +76,10 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../baby-recipes/baby-recipes.module#BabyRecipesPageModule'
+          },
+          {
+            path: ':id',
+            loadChildren: '../baby-recipes/baby-recipes-detail/baby-recipes-detail.module#BabyRecipesDetailPageModule'
           }
         ]
       },
