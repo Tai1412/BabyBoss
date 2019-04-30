@@ -19,7 +19,7 @@ export class BabyRecipesServiceService {
       })
     });
   }
-  getBabyRecipesDetail(tipId: string) {
-    return this.afs.collection('recipes').doc(tipId).valueChanges();
+  getBabyRecipesDetail(recipeId: string) {
+    return this.afs.collection('recipes').doc(recipeId).valueChanges();
   }
 }

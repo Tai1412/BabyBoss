@@ -34,7 +34,8 @@ export class RegisterPage implements OnInit {
   ngOnInit() {
     this.signupForm = new FormGroup({
       email: new FormControl('',[ Validators.required,Validators.email,Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'),Validators.maxLength(30)]),
-      password: new FormControl('', [Validators.required,Validators.minLength(6)])
+      password: new FormControl('', [Validators.required,Validators.minLength(6)]),
+      termsAccept: new FormControl(false,Validators.pattern('true'))
     });
   }
 

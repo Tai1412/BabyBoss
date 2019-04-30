@@ -3,15 +3,20 @@
         <ion-buttons slot="start">
             <ion-back-button  defaultHref="tabs/baby-recipes"></ion-back-button>
           </ion-buttons>
+          <ion-buttons slot="end">
+              <ion-button (click)="shareContent(recipe)">
+                  <ion-icon name="share"></ion-icon>
+              </ion-button>
+          </ion-buttons>
         <ion-title>{{recipe.title}}</ion-title>
     </ion-toolbar>
   </ion-header>
   
   <ion-content>
       <h3> Content </h3>
-      <p>
-         {{recipe.content}}
-      </p>
+      <ul *ngFor="let content of recipe.content">
+         <li>{{content}}</li>
+      </ul>
     
     
   </ion-content>
