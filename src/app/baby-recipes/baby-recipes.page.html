@@ -6,9 +6,10 @@
   
   <ion-content>
       <ion-card *ngFor="let babyRecipe of babyRecipes" routerLink="/tabs/baby-recipes/{{babyRecipe.payload.doc.id}}">
-        <ion-card-header>
+        <img src="{{babyRecipe.payload.doc.data().image}}"/>
+        <ion-card-title>
           {{babyRecipe.payload.doc.data().title}}
-        </ion-card-header>
+        </ion-card-title>
         <ion-card-content>
           Brief content:{{babyRecipe.payload.doc.data().content}}
         </ion-card-content>
