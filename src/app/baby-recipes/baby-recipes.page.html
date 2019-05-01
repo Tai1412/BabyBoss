@@ -5,6 +5,7 @@
   </ion-header>
   
   <ion-content>
+    <div *ngIf="isLoaded">
       <ion-card *ngFor="let babyRecipe of babyRecipes" routerLink="/tabs/baby-recipes/{{babyRecipe.payload.doc.id}}">
         <img src="{{babyRecipe.payload.doc.data().image}}"/>
         <ion-card-title>
@@ -17,5 +18,20 @@
            Time:{{babyRecipe.payload.doc.data().time}}
         </ion-card-content>
       </ion-card>
+    </div>
+
+    <div *ngIf="!isLoaded">
+        <ion-card *ngFor="let babyRecipe of [1,2,3,4]">
+            <ion-card-title>
+                <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </ion-card-title>
+              <ion-card-content>
+                  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </ion-card-content>
+              <ion-card-content>
+                  <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
+              </ion-card-content>
+        </ion-card>
+    </div>
   </ion-content>
   

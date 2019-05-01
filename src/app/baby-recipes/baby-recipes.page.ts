@@ -8,13 +8,17 @@ import { BabyRecipesServiceService } from './baby-recipes-service.service';
 })
 export class BabyRecipesPage implements OnInit {
   public babyRecipes:Array<any>=[];
+  public isLoaded=false;
   constructor(
     private firebaseService:BabyRecipesServiceService
   ) { }
 
   ngOnInit() {
     this.firebaseService.getBabyRecipes().then(data=>{
-      this.babyRecipes=data;
+     setTimeout(()=>{
+       this.isLoaded=true;
+       this.babyRecipes=data;
+     },4000)
     })
   }
 

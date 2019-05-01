@@ -29,11 +29,14 @@ export class LoginPage implements OnInit {
     });
   }
   emailLogin(userValue){
+    this.showLoading("Authenticating");
     this.fAuthService.emailLogin(userValue)
     .then(res =>{
-      this.router.navigate(['/tabs']);
-      this.showToast("Welcome Back");  
-      this.login.reset();
+      setTimeout(()=>{
+        this.router.navigate(['/tabs']);
+        this.showToast("Welcome Back"); 
+        this.login.reset();
+      },500)
     }, err => this.errorMessage = err.message)
   }
 
@@ -43,6 +46,14 @@ export class LoginPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+      duration: 600
+    });
+    loading.present();
   }
 
 }
