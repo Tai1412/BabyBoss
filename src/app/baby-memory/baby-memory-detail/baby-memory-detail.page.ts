@@ -27,10 +27,6 @@ export class BabyMemoryDetailPage implements OnInit {
     private route:ActivatedRoute,
     public router:Router,
     private camera:Camera,
-
-
-
-
   ) { 
     this.memory=this.getBabyMemoryDetail(this.memoryId).subscribe(data=>{
       this.memory=data;

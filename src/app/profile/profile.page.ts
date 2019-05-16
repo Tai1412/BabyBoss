@@ -46,9 +46,7 @@ export class ProfilePage implements OnInit {
       name:new FormControl('set your name',Validators.required),
       email: new FormControl('',[ Validators.required,Validators.email,Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'),Validators.maxLength(30)]),
     });
-    this.babyService.getListBabyService().then(data=>{
-      this.babyList=data;
-    })
+   
   }
   ionViewWillEnter(){
     this.afAuthService.getCurrentUser()
@@ -58,6 +56,11 @@ export class ProfilePage implements OnInit {
     },
     err=>console.log(err))
     this.profile_form.reset();
+
+    //list baby display and change 
+    this.babyService.getListBabyService().then(data=>{
+      this.babyList=data;
+    })
   }
   updateUserProfiles(name,email){
     this.profile_form.patchValue({

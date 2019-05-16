@@ -53,4 +53,35 @@ export class BabyServiceService {
       })
     });
   }
+  getBabyDetail(babyId: string) {
+    let currentUser=this.afAuth.auth.currentUser;
+    return this.afs.collection('User').doc(currentUser.uid).collection("Baby").doc(babyId).valueChanges();
+  }
+  updateBabyDetailService(babyId, value){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = this.afAuth.auth.currentUser;
+      this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(babyId).update(value)
+      .then((res) => 
+      {
+        resolve(res)
+      })
+      .catch((err)=>{
+         reject(err)
+      });
+    })
+  }
+
+  deleteBabyService(babyId){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = this.afAuth.auth.currentUser;
+      this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(babyId).delete()
+      .then((res) => 
+      {
+        resolve(res) 
+      })
+      .catch((err)=>{
+         reject(err)
+      });
+    })
+  }
 }

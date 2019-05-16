@@ -110,6 +110,10 @@ const routes: Routes = [
           {
             path: 'terms-and-condition',
             loadChildren: '../profile/terms-and-condition/terms-and-condition.module#TermsAndConditionPageModule'
+          },
+          {
+            path: ':id',
+            loadChildren: '../profile/baby-detail/baby-detail.module#BabyDetailPageModule'
           }
         ]
       },

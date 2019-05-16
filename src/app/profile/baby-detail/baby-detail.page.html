@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Your Baby Detail</ion-title>
+    <ion-buttons slot="end">
+        <ion-button (click)="deleteBaby()">
+            <ion-icon name="trash"></ion-icon>
+        </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="start">
+        <ion-back-button  defaultHref="tabs/profile"></ion-back-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="updateBabyForm" (submit)="updateBabySubmit(updateBabyForm.value)">
+        <ion-item>
+          <ion-label position="stacked" color="primary">Your Baby Name</ion-label>
+          <ion-input type="text" formControlName="name" placeholder="{{baby?.name}}" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Your Baby Age</ion-label>
+          <ion-input type="text" formControlName="age" placeholder="{{baby?.age}}"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked" color="primary">Your Baby Gender</ion-label>
+            <ion-select multiple="false" interface="popover" formControlName="gender" placeholder="{{baby?.gender}}">
+              <ion-select-option value="boy">Boy</ion-select-option>
+              <ion-select-option value="girl">Girl</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-button ion-button block type="submit" [disabled]="!updateBabyForm.valid">Change Baby Detail</ion-button>
+      </form>
+</ion-content>
