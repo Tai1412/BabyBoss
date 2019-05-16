@@ -4,6 +4,7 @@ import {AuthenticationService} from '../services/authentication.service';
 import { Router } from '@angular/router';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 import {ToastController} from '@ionic/angular';
+import { BabyServiceService } from '../services/baby-service.service';
 
 @Component({
   selector: 'app-profile',
@@ -13,6 +14,7 @@ import {ToastController} from '@ionic/angular';
 export class ProfilePage implements OnInit {
   profile_form:FormGroup;
   errorMessage:string='';
+  public babyList:Array<any>=[];
   user: any = {
     id: "",
     name: "",
@@ -32,7 +34,8 @@ export class ProfilePage implements OnInit {
   constructor(
     public afAuthService: AuthenticationService,
     public router:Router,
-    public toastCtrl:ToastController
+    public toastCtrl:ToastController,
+    public babyService:BabyServiceService
     ) 
     { 
   
@@ -43,6 +46,9 @@ export class ProfilePage implements OnInit {
       name:new FormControl('set your name',Validators.required),
       email: new FormControl('',[ Validators.required,Validators.email,Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'),Validators.maxLength(30)]),
     });
+    this.babyService.getListBabyService().then(data=>{
+      this.babyList=data;
+    })
   }
   ionViewWillEnter(){
     this.afAuthService.getCurrentUser()

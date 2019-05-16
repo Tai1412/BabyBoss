@@ -38,6 +38,16 @@
 
 
   <ion-item [routerLink]="'/tabs/profile/terms-and-condition/'" routerDirection="forward">Terms And Condition</ion-item>
+  
+  <ion-list-header>
+      <ion-label>Your Baby List</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let baby of babyList" > 
+        <ion-avatar slot="start">
+          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+        </ion-avatar>
+        <ion-label>Name: {{baby.payload.doc.data().name}}<br/>Age: {{baby.payload.doc.data().age}}<br/>Gender: {{baby.payload.doc.data().gender}}</ion-label>
+    </ion-item>
 
   <ion-button ion-button color="primary" block icon-start (click)="logout()">
     <ion-icon name="log-out"></ion-icon>

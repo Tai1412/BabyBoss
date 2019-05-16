@@ -44,4 +44,13 @@ export class BabyServiceService {
       })
     })
   }
+  getListBabyService(){
+    let currentUser=this.afAuth.auth.currentUser;
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection('User').doc(currentUser.uid).collection("Baby").snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots);
+      })
+    });
+  }
 }
