@@ -1,9 +1,22 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>baby-memory</ion-title>
+    <ion-buttons slot="end">
+        <ion-button routerLink="/tabs/baby-memory/new-baby-memory">
+            <ion-icon name="add"></ion-icon>
+        </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+    <img src="{{myPhoto}}"/>
 
+    <ion-card *ngFor="let image of myImageList" routerLink="/tabs/baby-memory/{{image.payload.doc.id}}">
+        <ion-card-title>
+            {{image.payload.doc.data().title}}
+          </ion-card-title>
+          <img src="{{image.payload.doc.data().imageUrl}}"/>
+
+    </ion-card>
 </ion-content>

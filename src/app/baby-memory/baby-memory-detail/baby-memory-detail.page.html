@@ -1,0 +1,47 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button  defaultHref="tabs/baby-memory"></ion-back-button>
+          </ion-buttons>
+          <ion-buttons slot="end">
+              <ion-button (click)="deleteBabyMemory()">
+                  <ion-icon name="trash"></ion-icon>
+              </ion-button>
+          </ion-buttons>
+        <ion-title>{{memory?.title}}</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  
+  <!-- <ion-content>
+      <h3> Content </h3>
+      <ul >
+          <img src="{{memory?.imageUrl}}"/>
+      </ul>
+    
+    
+  </ion-content> -->
+  <ion-content>
+      <form [formGroup]="baby_memory_form" (submit)="updateBabyMemory(baby_memory_form.value)">
+      <ion-list class="form-list">
+        <ion-item>
+          <ion-label color="primary" stacked>Your Title</ion-label>
+          <ion-input type="text" autocomplete="on" formControlName="title" clearInput></ion-input>
+        </ion-item>
+        <div>
+          <ng-container *ngFor="let validation of validation_messages.title">
+            <div class="error-message" *ngIf="baby_memory_form.get('title').hasError(validation.type) && (baby_memory_form.get('title').dirty || baby_memory_form.get('title').touched)">
+              {{ validation.message }}
+            </div>
+          </ng-container>
+        </div>
+        <img src="{{memory?.imageUrl}}"/>
+        <ion-button ion-button block type="submit"  [disabled]="!baby_memory_form.valid">Add</ion-button>
+      </ion-list>
+      </form>
+      <ion-button (click)="takeBabyMemoryPicture()" >change</ion-button>
+      <img src="{{myPhoto}}"/>
+
+
+      <ion-label class="error-message">{{errorMessage}}</ion-label>
+    </ion-content>
+  

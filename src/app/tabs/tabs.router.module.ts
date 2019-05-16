@@ -89,6 +89,14 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../baby-memory/baby-memory.module#BabyMemoryPageModule'
+          },
+          {
+            path: 'new-baby-memory',
+            loadChildren: '../baby-memory/new-baby-memory/new-baby-memory.module#NewBabyMemoryPageModule'
+          },
+          {
+            path: ':id',
+            loadChildren: '../baby-memory/baby-memory-detail/baby-memory-detail.module#BabyMemoryDetailPageModule'
           }
         ]
       },

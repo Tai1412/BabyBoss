@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { AngularFireAuth } from '@angular/fire/auth';
+import { AngularFirestore } from '@angular/fire/firestore';
+
 
 @Component({
   selector: 'app-baby-memory',
@@ -6,10 +9,30 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./baby-memory.page.scss'],
 })
 export class BabyMemoryPage implements OnInit {
-
-  constructor() { }
+  myPhoto:any;
+  myImageList:Array<any>=[];
+  constructor(
+    private afAuth:AngularFireAuth,
+    private afs:AngularFirestore
+  ) { }
 
   ngOnInit() {
+    
+  }
+  ionViewWillEnter(){
+    this.getImages().then(data=>{
+      this.myImageList=data;
+    })
+  }
+  
+  getImages(){
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = this.afAuth.auth.currentUser;
+       this.afs.collection('User').doc(currentUser.uid).collection('images').snapshotChanges()
+      .subscribe(snapshots => {
+        resolve(snapshots);
+      })
+    });
   }
 
 }
