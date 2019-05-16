@@ -6,7 +6,6 @@ import { AngularFirestore } from '@angular/fire/firestore';
   providedIn: 'root'
 })
 export class BabyServiceService {
-
   constructor(
     private afAuth:AngularFireAuth,
     private afs:AngularFirestore
@@ -29,4 +28,20 @@ export class BabyServiceService {
   //     )
   //   })
   // }
+  addFirstBabyService(value){
+    let currentUser=this.afAuth.auth.currentUser;
+    return new Promise<any>((resolve, reject) => {
+      this.afs.collection("User").doc(currentUser.uid).collection("Baby").add({
+        gender:value.gender,
+        age:value.age,
+        name:value.name,
+      })
+      .then((res)=>{
+        resolve(res)
+      })
+      .catch((err)=>{
+        reject(err)
+      })
+    })
+  }
 }

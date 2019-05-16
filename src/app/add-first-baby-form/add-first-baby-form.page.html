@@ -1,0 +1,26 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>add-first-baby-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="addFirstBabyForm" (submit)="onSubmit(addFirstBabyForm.value)">
+        <ion-item>
+          <ion-label position="stacked" color="primary">What Is Your's Baby Name</ion-label>
+          <ion-input type="text" formControlName="name" required></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">What Is Your's Baby Age</ion-label>
+          <ion-input type="text" formControlName="age" required></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked" color="primary">Select Your Baby's Gender</ion-label>
+            <ion-select multiple="false" interface="popover" formControlName="gender">
+              <ion-select-option value="boy">Boy</ion-select-option>
+              <ion-select-option value="girl">Girl</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-button ion-button block type="submit" [disabled]="!addFirstBabyForm.valid">Add Baby</ion-button>
+      </form>
+</ion-content>
