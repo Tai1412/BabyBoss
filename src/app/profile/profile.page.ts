@@ -60,6 +60,7 @@ export class ProfilePage implements OnInit {
     //list baby display and change 
     this.babyService.getListBabyService().then(data=>{
       this.babyList=data;
+      console.log(this.babyList);
     })
   }
   updateUserProfiles(name,email){
@@ -77,6 +78,9 @@ export class ProfilePage implements OnInit {
       this.errorMessage = error.message
       this.showToast(this.errorMessage)
     })
+  }
+  goToAddBabyPage(){
+    this.router.navigate(['/add-first-baby-form']);
   }
   logout(){
     this.afAuthService.logout()

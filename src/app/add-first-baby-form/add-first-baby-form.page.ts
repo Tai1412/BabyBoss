@@ -3,7 +3,7 @@ import { BabyServiceService } from '../services/baby-service.service';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { Router } from '@angular/router';
 import { reject } from 'q';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController, ToastController } from '@ionic/angular';
 @Component({
   selector: 'app-add-first-baby-form',
   templateUrl: './add-first-baby-form.page.html',
@@ -17,7 +17,7 @@ export class AddFirstBabyFormPage implements OnInit {
    private formBuilder: FormBuilder,
    public router:Router,
    private loadingCtrl: LoadingController,
-
+  private toastCtrl:ToastController,
 
   ) { }
 
@@ -39,11 +39,15 @@ export class AddFirstBabyFormPage implements OnInit {
     .then(
       res => {
         this.router.navigate(['/tabs']);
+        this.showToast("Successful Add Baby");
       }
     )
     .catch(err=>{
       reject(err)
     })
+  }
+  goToProfilePage(){
+    this.router.navigate(['/tabs/profile']);
   }
   async showLoading(message) {
     const loading =await this.loadingCtrl.create({
@@ -58,6 +62,13 @@ export class AddFirstBabyFormPage implements OnInit {
   }
   dismiss(){
     this.loadingCtrl.dismiss();
+  }
+  async showToast(message){
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

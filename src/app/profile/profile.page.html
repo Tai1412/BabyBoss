@@ -1,10 +1,16 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="goToAddBabyPage()">
+        <ion-icon name="add"></ion-icon>
+      </ion-button>
+    </ion-buttons>
     <ion-buttons slot="end" [hidden]="!profile_form.dirty || !profile_form.valid">
       <ion-button ion-button (click)="saveUserProfiles(profile_form.value)">
         SAVE
       </ion-button>
-    </ion-buttons><ion-title>SETTING</ion-title>
+    </ion-buttons>
+    <ion-title>SETTING</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,31 +29,43 @@
         </ng-container>
       </div>
       <ion-item>
-          <ion-label stacked>Your email</ion-label>
-          <ion-input type="text" formControlName="email" clearInput></ion-input>
-        </ion-item>
-        <div>
-          <ng-container *ngFor="let validation of validation_messages.email">
-            <div class="error-message" *ngIf="profile_form.get('email').hasError(validation.type) && (profile_form.get('email').dirty || profile_form.get('email').touched)">
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
+        <ion-label stacked>Your email</ion-label>
+        <ion-input type="text" formControlName="email" clearInput></ion-input>
+      </ion-item>
+      <div>
+        <ng-container *ngFor="let validation of validation_messages.email">
+          <div class="error-message" *ngIf="profile_form.get('email').hasError(validation.type) && (profile_form.get('email').dirty || profile_form.get('email').touched)">
+            {{ validation.message }}
+          </div>
+        </ng-container>
+      </div>
     </ion-list>
   </form>
 
 
   <ion-item [routerLink]="'/tabs/profile/terms-and-condition/'" routerDirection="forward">Terms And Condition</ion-item>
-  
+
   <ion-list-header>
-      <ion-label>Your Baby List</ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let baby of babyList" routerLink="/tabs/profile/{{baby.payload.doc.id}}" > 
-        <ion-avatar slot="start">
-          <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-        </ion-avatar>
-        <ion-label>Name: {{baby.payload.doc.data().name}}<br/>Age: {{baby.payload.doc.data().age}}<br/>Gender: {{baby.payload.doc.data().gender}}</ion-label>
+    <ion-label>Your Baby List</ion-label>
+  </ion-list-header>
+  <div *ngIf="babyList.length>0; else noBaby">
+    <ion-item *ngFor="let baby of babyList" routerLink="/tabs/profile/{{baby.payload.doc.id}}">
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>Name: {{baby.payload.doc.data().name}}<br />Age: {{baby.payload.doc.data().age}}<br />Gender:
+        {{baby.payload.doc.data().gender}}</ion-label>
     </ion-item>
+  </div>
+  <ng-template #noBaby>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>Non Baby Added! <br> Please add your baby by "+" <br>on the screen</ion-label>
+    </ion-item>
+  </ng-template>
+
 
   <ion-button ion-button color="primary" block icon-start (click)="logout()">
     <ion-icon name="log-out"></ion-icon>

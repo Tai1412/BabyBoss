@@ -1,6 +1,6 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>add-first-baby-form</ion-title>
+    <ion-title>Add Your Baby</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -23,4 +23,5 @@
         </ion-item>
         <ion-button ion-button block type="submit" [disabled]="!addFirstBabyForm.valid">Add Baby</ion-button>
       </form>
+      <ion-button (click)="goToProfilePage()">Go To Your Profile</ion-button>
 </ion-content>
