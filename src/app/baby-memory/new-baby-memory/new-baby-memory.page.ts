@@ -5,6 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase/app';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-new-baby-memory',
@@ -13,6 +14,7 @@ import { FormGroup, FormControl,Validators } from '@angular/forms';
 })
 export class NewBabyMemoryPage implements OnInit {
   baby_memory_form:FormGroup;
+  public babyId:any;
   validation_messages = {
     'title': [
         { type: 'required', message: 'Title is required' },
@@ -22,13 +24,18 @@ export class NewBabyMemoryPage implements OnInit {
   constructor(
     private camera:Camera,
     private afAuth:AngularFireAuth,
-    private afs:AngularFirestore
+    private afs:AngularFirestore,
+    private storage: Storage
+
     ) { }
 
   ngOnInit() {
     this.baby_memory_form=new FormGroup({
       title:new FormControl('',Validators.required),
     });
+    this.storage.get('babyId').then(val => {
+      this.babyId = val
+    })
   }
   takeBabyMemoryPicture() {
     const optionsGallery: CameraOptions = {
@@ -72,7 +79,7 @@ export class NewBabyMemoryPage implements OnInit {
   createBabyMemory(value){
     return new Promise<any>((resolve,reject)=>{
       let currentUser=this.afAuth.auth.currentUser;
-      this.afs.collection('User').doc(currentUser.uid).collection('images').add({
+      this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("images").add({
         title:value.title,
         imageUrl:this.myPhoto//from takeBabyMemoryPicture
       })

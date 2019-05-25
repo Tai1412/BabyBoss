@@ -5,6 +5,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase/app';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-baby-memory-detail',
@@ -16,6 +18,7 @@ export class BabyMemoryDetailPage implements OnInit {
   memory:any;
   myPhoto:string=null;
   baby_memory_form: FormGroup;
+  public babyId:any;
   validation_messages = {
     'title': [
         { type: 'required', message: 'Title is required' },
@@ -27,18 +30,23 @@ export class BabyMemoryDetailPage implements OnInit {
     private route:ActivatedRoute,
     public router:Router,
     private camera:Camera,
+    private storage: Storage
+
   ) { 
-    this.memory=this.getBabyMemoryDetail(this.memoryId).subscribe(data=>{
-      this.memory=data;
-      console.log("data",this.memory.title)
-    });
+    
     this.baby_memory_form = new FormGroup({
-      title:new FormControl(this.memory.title,Validators.required),
+      title:new FormControl('',Validators.required),
     });
   }
 
   ngOnInit() {
-   
+    this.storage.get('babyId').then(val => {
+      this.babyId = val
+      this.memory=this.getBabyMemoryDetail(this.memoryId).subscribe(data=>{
+        this.memory=data;
+        console.log("data",this.memory.title)
+      });
+    })
   }
   takeBabyMemoryPicture() {
     const optionsGallery: CameraOptions = {
@@ -63,7 +71,7 @@ export class BabyMemoryDetailPage implements OnInit {
   deleteBabyMemory(){
     return new Promise<any>((resolve, reject) => {
       let currentUser = this.afAuth.auth.currentUser;
-      this.afs.collection('User').doc(currentUser.uid).collection('images').doc(this.memoryId).delete()
+      this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("images").doc(this.memoryId).delete()
       .then((res) => 
       {
         this.router.navigate(['/tabs/baby-memory']); 
@@ -75,7 +83,7 @@ export class BabyMemoryDetailPage implements OnInit {
   }
   getBabyMemoryDetail(memoryId: string) {
     let currentUser=this.afAuth.auth.currentUser;
-    return this.afs.collection('User').doc(currentUser.uid).collection("images").doc(memoryId).valueChanges();
+    return this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("images").doc(memoryId).valueChanges();
   }
   updateBabyMemory(value){
     return new Promise<any>((resolve, reject) => {
@@ -98,7 +106,7 @@ export class BabyMemoryDetailPage implements OnInit {
     if(this.myPhoto==null){
       this.myPhoto=this.memory.imageUrl
     }
-      this.afs.collection('User').doc(currentUser.uid).collection('images').doc(this.memoryId).update({
+    this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("images").doc(this.memoryId).update({
         title:value.title,
         imageUrl:this.myPhoto,
       })

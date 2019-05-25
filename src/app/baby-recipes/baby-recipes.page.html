@@ -5,7 +5,7 @@
   </ion-header>
   
   <ion-content>
-    <div *ngIf="isLoaded">
+    <!-- <div *ngIf="isLoaded">
       <ion-card *ngFor="let babyRecipe of babyRecipes" routerLink="/tabs/baby-recipes/{{babyRecipe.payload.doc.id}}">
         <img src="{{babyRecipe.payload.doc.data().image}}"/>
         <ion-card-title>
@@ -18,9 +18,50 @@
            Time:{{babyRecipe.payload.doc.data().time}}
         </ion-card-content>
       </ion-card>
-    </div>
+    </div> -->
+    <ion-grid *ngIf="isLoaded" >
+      <ion-row *ngFor="let babyRecipe of babyRecipes" routerLink="/tabs/baby-recipes/{{babyRecipe.payload.doc.id}}" style="text-align: center;margin-top:10px;">
+        <ion-col>
+            <img src="{{babyRecipe.payload.doc.data().image}}"/>
+        </ion-col>
+        <ion-col style="padding:0;">
+          <ion-row style="height: 92.75px;">
+              {{babyRecipe.payload.doc.data().title}}
+          </ion-row>
+          <ion-row style="height: 92.75px;">
+            <ion-col style="background: #77d353;">
+                {{babyRecipe.payload.doc.data().age}}
+            </ion-col>
+            <ion-col style="background:#ff9052;">
+                {{babyRecipe.payload.doc.data().time}}
+            </ion-col>
+          </ion-row>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-    <div *ngIf="!isLoaded">
+    <ion-grid *ngIf="!isLoaded" >
+        <ion-row *ngFor="let babyRecipe of [1,2,3,4]">
+          <ion-col>
+              <ion-skeleton-text animated style="height:100%;"></ion-skeleton-text>
+          </ion-col>
+          <ion-col style="padding:0;">
+            <ion-row style="height: 92.75px;"> 
+                <ion-skeleton-text animated style="height: 100%"></ion-skeleton-text>
+            </ion-row>
+            <ion-row style="height: 92.75px;">
+              <ion-col >
+                  <ion-skeleton-text animated style="height: 100%"></ion-skeleton-text>
+                </ion-col>
+              <ion-col >
+                  <ion-skeleton-text animated style="height: 100%"></ion-skeleton-text>
+                </ion-col>
+            </ion-row>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
+    <!-- <div *ngIf="!isLoaded">
         <ion-card *ngFor="let babyRecipe of [1,2,3,4]">
             <ion-card-title>
                 <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
@@ -32,6 +73,6 @@
                   <ion-skeleton-text animated style="width: 60%"></ion-skeleton-text>
               </ion-card-content>
         </ion-card>
-    </div>
+    </div> -->
   </ion-content>
   

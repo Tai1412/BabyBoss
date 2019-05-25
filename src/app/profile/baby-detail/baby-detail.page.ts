@@ -1,30 +1,39 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Injectable } from '@angular/core';
 import { BabyServiceService } from 'src/app/services/baby-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+
 
 @Component({
   selector: 'app-baby-detail',
   templateUrl: './baby-detail.page.html',
   styleUrls: ['./baby-detail.page.scss'],
 })
+@Injectable({
+  providedIn: 'root',
+})
 export class BabyDetailPage implements OnInit {
   public babyId:string=this.route.snapshot.paramMap.get('id');
   updateBabyForm:FormGroup
   baby:any;
+  public selectedId:any;
   constructor(
     private firebaseService:BabyServiceService,
     private route:ActivatedRoute,
     private formBuilder: FormBuilder,
     public router:Router,
     private toastCtrl:ToastController,
+    private storage:Storage,
 
   ) {
     this.baby=this.firebaseService.getBabyDetail(this.babyId).subscribe(data=>{
       this.baby=data;
       this.updateBaby(this.baby.age,this.baby.name,this.baby.gender);
-      console.log(this.baby)
+      this.storage.set('babyDetail',this.baby);
+      this.storage.set('babyId',this.babyId);
+      console.log(this.babyId)
     })
     this.updateBabyForm = this.formBuilder.group({
       age: new FormControl(this.baby.age),
@@ -70,5 +79,9 @@ export class BabyDetailPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  goBack(){
+    this.selectedId=this.babyId;
+    this.router.navigate(['/tabs/profile']);
   }
 }

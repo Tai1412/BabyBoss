@@ -13,10 +13,18 @@
   </ion-header>
   
   <ion-content>
-      <h3> Content </h3>
-      <ul *ngFor="let content of recipe.content">
-         <li>{{content}}</li>
+      <img src="{{recipe.image}}" style="width:100%;height:300px;" alt="Baby Recipe image"> 
+      <h3> Time For This Recipe:{{recipe.time}} </h3>
+      <h3> Suitable For Baby Age:{{recipe.age}} </h3>
+      <h3>Ingredients List</h3>
+      <ul *ngFor="let ingredient of recipe.ingredients">
+         <li>{{ingredient}}</li>
       </ul>
+      <h3>Method</h3>
+      <ul *ngFor="let method of recipe.method">
+         <li>{{method}}</li>
+      </ul>
+
     
     
   </ion-content>
