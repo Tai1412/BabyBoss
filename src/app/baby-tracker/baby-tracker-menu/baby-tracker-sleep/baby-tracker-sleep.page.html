@@ -8,5 +8,17 @@
 </ion-header>
 
 <ion-content>
-
+    <form [formGroup]="sleep_form" (submit)="createBabyTrackerSleep(sleep_form.value)">
+        <ion-item>
+            <ion-label position="stacked" color="primary">Start Time</ion-label>
+            <ion-datetime formControlName="startTime" display-Format="DD MMMM YYYY hh:mm A">
+            </ion-datetime>
+          </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">End Time</ion-label>
+          <ion-datetime formControlName="endTime" display-Format="DD MMMM YYYY hh:mm A">
+            </ion-datetime>
+        </ion-item>
+        <ion-button ion-button block type="submit" [disabled]="!sleep_form.valid">Add</ion-button>
+      </form>
 </ion-content>

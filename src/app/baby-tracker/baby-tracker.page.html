@@ -22,7 +22,46 @@
       <ion-label>Non Baby chosen! <br> Please choose your baby<br> in your baby list in profile <br></ion-label>
     </ion-item>
   </ng-template>
-  <ion-fab vertical="bottom" horizontal="end">
+
+  <ion-card *ngFor="let data of data1">
+    <ion-card-header>
+      Time:{{ data.payload.doc.data().time }}
+    </ion-card-header>
+    <ion-card-content>
+      Health Record: {{ data.payload.doc.data().healthRecord }}
+    </ion-card-content>
+  </ion-card>
+
+  <ion-card *ngFor="let data of data2">
+      <ion-card-header>
+       start Time:{{ data.payload.doc.data().startTime }}
+      </ion-card-header>
+      <ion-card-content>
+        end time: {{ data.payload.doc.data().endTime }}
+      </ion-card-content>
+    </ion-card>
+
+    <ion-card *ngFor="let data of data3">
+        <ion-card-header>
+          Time:{{ data.payload.doc.data().time }}
+        </ion-card-header>
+        <ion-card-content>
+          Status: {{ data.payload.doc.data().status }}
+        </ion-card-content>
+      </ion-card>
+
+      <ion-card *ngFor="let data of data4">
+          <ion-card-header>
+            Time:{{ data.payload.doc.data().time }}
+          </ion-card-header>
+          <ion-card-content>
+            Milk: {{ data.payload.doc.data().milk }}
+          </ion-card-content>
+          <ion-card-content>
+            Food: {{ data.payload.doc.data().food }}
+          </ion-card-content>
+        </ion-card>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/tabs/baby-tracker/baby-tracker-menu">
       <ion-icon name="add"></ion-icon>
     </ion-fab-button>

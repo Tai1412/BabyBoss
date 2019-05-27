@@ -8,5 +8,20 @@
 </ion-header>
 
 <ion-content>
-
+    <form [formGroup]="tracker_feeding_form" (submit)="createBabyTrackerFeeding(tracker_feeding_form.value)">
+        <ion-item>
+            <ion-label position="stacked" color="primary">Time</ion-label>
+            <ion-datetime formControlName="time" display-Format="DD MMMM YYYY hh:mm A">
+            </ion-datetime>
+          </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Enter The Amount Of Milk</ion-label>
+          <ion-input type="text" formControlName="milk"></ion-input>
+        </ion-item>
+        <ion-item>
+            <ion-label position="stacked" color="primary">Enter The Type Of Food</ion-label>
+            <ion-input type="text" formControlName="food"></ion-input>
+          </ion-item>
+        <ion-button ion-button block type="submit" [disabled]="!tracker_feeding_form.valid">Add</ion-button>
+      </form>
 </ion-content>

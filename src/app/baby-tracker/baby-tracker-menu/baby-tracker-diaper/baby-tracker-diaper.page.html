@@ -8,5 +8,19 @@
 </ion-header>
 
 <ion-content>
-
+    <form [formGroup]="tracker_diaper_form" (submit)="createBabyTrackDiaper(tracker_diaper_form.value)">
+        <ion-item>
+            <ion-label position="stacked" color="primary">Time</ion-label>
+            <ion-datetime formControlName="time" display-Format="DD MMMM YYYY hh:mm A">
+            </ion-datetime>
+          </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">Status</ion-label>
+          <ion-select multiple="false" interface="popover" formControlName="status" placeholder="{{baby?.gender}}">
+              <ion-select-option value="dry">Dry</ion-select-option>
+              <ion-select-option value="wet">Wet</ion-select-option>
+            </ion-select>
+        </ion-item>
+        <ion-button ion-button block type="submit" [disabled]="!tracker_diaper_form.valid">Add</ion-button>
+      </form>
 </ion-content>
