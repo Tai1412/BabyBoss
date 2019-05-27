@@ -1,0 +1,31 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button  defaultHref="tabs/baby-tracker"></ion-back-button>
+        </ion-buttons>
+    <ion-title>baby-tracker-menu</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <ion-grid>
+        <div style="text-align: center;">
+        <ion-row>
+          <ion-col routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-sleep">
+            Sleep
+          </ion-col>
+          <ion-col routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-diaper">
+            Diaper
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-feeding">
+            Feeding
+          </ion-col>
+          <ion-col routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-health">
+            Health
+          </ion-col>
+        </ion-row>
+        </div>
+      </ion-grid>
+</ion-content>

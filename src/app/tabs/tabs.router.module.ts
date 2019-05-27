@@ -67,7 +67,32 @@ const routes: Routes = [
           {
             path: '',
             loadChildren: '../baby-tracker/baby-tracker.module#BabyTrackerPageModule'
-          }
+          },
+          {
+            path:'baby-tracker-menu',
+            children:[
+              {
+                path:'',
+                loadChildren:'../baby-tracker/baby-tracker-menu/baby-tracker-menu.module#BabyTrackerMenuPageModule'
+              },
+              {
+                path:'baby-tracker-sleep',
+                loadChildren:'../baby-tracker/baby-tracker-menu/baby-tracker-sleep/baby-tracker-sleep.module#BabyTrackerSleepPageModule'
+              },
+              {
+                path:'baby-tracker-diaper',
+                loadChildren:'../baby-tracker/baby-tracker-menu/baby-tracker-diaper/baby-tracker-diaper.module#BabyTrackerDiaperPageModule'
+              },
+              {
+                path:'baby-tracker-feeding',
+                loadChildren:'../baby-tracker/baby-tracker-menu/baby-tracker-feeding/baby-tracker-feeding.module#BabyTrackerFeedingPageModule'
+              },
+              {
+                path:'baby-tracker-health',
+                loadChildren:'../baby-tracker/baby-tracker-menu/baby-tracker-health/baby-tracker-health.module#BabyTrackerHealthPageModule'
+              },
+          ]
+          },
         ]
       },
       {

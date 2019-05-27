@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { FormGroup, FormControl,Validators } from '@angular/forms';
 import {ToastController} from '@ionic/angular';
 import { BabyServiceService } from '../services/baby-service.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-profile',
@@ -35,7 +36,8 @@ export class ProfilePage implements OnInit {
     public afAuthService: AuthenticationService,
     public router:Router,
     public toastCtrl:ToastController,
-    public babyService:BabyServiceService
+    public babyService:BabyServiceService,
+    private storage:Storage,
     ) 
     { 
   
@@ -86,6 +88,8 @@ export class ProfilePage implements OnInit {
     this.afAuthService.logout()
     .then((res) => {
       this.router.navigate(['/login']);//log out to previous navigation
+      this.storage.remove('babyId');//remove localtorage
+      this.storage.remove('babyDetail');
       this.showToast("LogOut Successfully");
     }, (error) => {
       console.log("Logout error", error);

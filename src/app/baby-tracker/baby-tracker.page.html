@@ -5,21 +5,26 @@
 </ion-header>
 
 <ion-content>
-    <div *ngIf="babyList; else noBaby">
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-          </ion-avatar>
-          <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}}<br />Gender:
-            {{babyList.gender}}</ion-label>
-        </ion-item>
-      </div>
-      <ng-template #noBaby>
-        <ion-item>
-          <ion-avatar slot="start">
-            <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-          </ion-avatar>
-          <ion-label>Non Baby Added! <br> Please add your baby by "+" <br>on the screen</ion-label>
-        </ion-item>
-      </ng-template>
+  <div *ngIf="babyList; else noBaby">
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}}<br />Gender:
+        {{babyList.gender}}</ion-label>
+    </ion-item>
+  </div>
+  <ng-template #noBaby>
+    <ion-item>
+      <ion-avatar slot="start">
+        <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
+      </ion-avatar>
+      <ion-label>Non Baby chosen! <br> Please choose your baby<br> in your baby list in profile <br></ion-label>
+    </ion-item>
+  </ng-template>
+  <ion-fab vertical="bottom" horizontal="end">
+    <ion-fab-button routerLink="/tabs/baby-tracker/baby-tracker-menu">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
 </ion-content>
