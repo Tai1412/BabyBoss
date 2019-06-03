@@ -6,7 +6,7 @@ import { Validators, FormGroup, FormControl } from '@angular/forms';
 import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase/app';
 import { Storage } from '@ionic/storage';
-
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-baby-memory-detail',
@@ -30,7 +30,8 @@ export class BabyMemoryDetailPage implements OnInit {
     private route:ActivatedRoute,
     public router:Router,
     private camera:Camera,
-    private storage: Storage
+    private storage: Storage,
+    private toastCtrl:ToastController
 
   ) { 
     
@@ -74,8 +75,7 @@ export class BabyMemoryDetailPage implements OnInit {
       this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("images").doc(this.memoryId).delete()
       .then((res) => 
       {
-        this.router.navigate(['/tabs/baby-memory']); 
-      })
+        this.router.navigate(['/tabs/baby-memory']);      })
       .catch((err)=>{
          reject(err)
       });
@@ -113,11 +113,20 @@ export class BabyMemoryDetailPage implements OnInit {
       .then((res) => 
       {
         this.router.navigate(['/tabs/baby-memory']); 
+        this.showToast("Updated Successfully")
         resolve(res)
       })
       .catch((err)=>{
          reject(err)
       });
     })
+  }
+
+  async showToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 }

@@ -8,10 +8,16 @@
     margin-right:15px;
 }
 h1{
-    color:blue;
+    color:palevioletred;
+}
+h3{
+    color:palevioletred;
 }
 .email,.password
 {
-    border-radius: 10px;
+    --border-radius: 50px;
     font-size: 20px;
+}
+ion-content{
+    text-align: center;
 }

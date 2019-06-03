@@ -3,6 +3,8 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-baby-tracker-diaper',
@@ -15,7 +17,9 @@ export class BabyTrackerDiaperPage implements OnInit {
   constructor(
     private afAuth:AngularFireAuth,
     private afs:AngularFirestore,
-    private storage: Storage
+    private storage: Storage,
+    private router:Router,
+    private toastCtrl:ToastController
   ) { }
 
   ngOnInit() {
@@ -35,9 +39,18 @@ export class BabyTrackerDiaperPage implements OnInit {
         status:value.status
       })
       .then(res=>{
+        this.router.navigate(["tabs/baby-tracker"]);
+        this.showToast("Added Successfully");
         resolve(res)
       })
     })
+  }
+  async showToast(message) {
+    const toast = await this.toastCtrl.create({
+      message: message,
+      duration: 2000
+    });
+    toast.present();
   }
 
 }

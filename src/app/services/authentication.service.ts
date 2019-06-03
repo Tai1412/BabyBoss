@@ -19,6 +19,7 @@ export class AuthenticationService {
       this.afAuth.auth.createUserWithEmailAndPassword(userValue.email, userValue.password)
       .then(()=>{
         let currentUser=this.afAuth.auth.currentUser;
+        currentUser.sendEmailVerification();
         this.afs.collection("User").doc(currentUser.uid).set({
           email:userValue.email
         })

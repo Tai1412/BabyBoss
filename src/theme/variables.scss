@@ -74,4 +74,21 @@
   --ion-color-light-contrast-rgb: 0, 0, 0;
   --ion-color-light-shade: #d7d8da;
   --ion-color-light-tint: #f5f6f9;
+
+  --ion-color-sleepingCard:#F9D2D3;
+  --ion-color-feedingCard:#13ceb1;
+  --ion-color-diaperCard:#77d353;
+  --ion-color-healthCard:#ff9052;
+}
+.ion-color-sleepingCard{
+  --ion-color-base: #F9D2D3;
+}
+.ion-color-feedingCard{
+  --ion-color-base:#13ceb1;
+}
+.ion-color-diaperCard{
+  --ion-color-base:#77d353;
+}
+.ion-color-healthCard{
+  --ion-color-base:#ff9052;
 }

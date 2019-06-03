@@ -1,38 +1,38 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>baby-memory</ion-title>
-    <ion-buttons slot="end">
-        <ion-button routerLink="/tabs/baby-memory/new-baby-memory">
-            <ion-icon name="add"></ion-icon>
-        </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-title>Baby Memory</ion-title>
+        <ion-buttons slot="end">
+            <ion-button routerLink="/tabs/baby-memory/new-baby-memory" [disabled]="babyId==null">
+                <ion-icon name="images"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-content>
-        <div *ngIf="babyList; else noBaby">
-                <ion-item>
-                  <ion-avatar slot="start">
-                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                  </ion-avatar>
-                  <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}}<br />Gender:
-                    {{babyList.gender}}</ion-label>
-                </ion-item>
-              </div>
-              <ng-template #noBaby>
-                <ion-item>
-                  <ion-avatar slot="start">
-                    <img src="https://gravatar.com/avatar/dba6bae8c566f9d4041fb9cd9ada7741?d=identicon&f=y">
-                  </ion-avatar>
-                  <ion-label>Non Baby chosen! <br> Please choose your baby<br> in your baby list in profile <br></ion-label>
-                </ion-item>
-              </ng-template>
+    <div *ngIf="babyList; else noBaby">
+        <ion-item lines="none">
+            <ion-avatar slot="start">
+                <img src="/assets/image/icon.png">
+            </ion-avatar>
+            <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}}<br />Gender:
+                {{babyList.gender}}</ion-label>
+        </ion-item>
+    </div>
+    <ng-template #noBaby>
+        <ion-item lines="none">
+            <ion-avatar slot="start">
+                <img src="/assets/image/icon.png">
+            </ion-avatar>
+            <ion-label>Non Baby chosen! <br> Please choose your baby<br> in your baby list in profile <br></ion-label>
+        </ion-item>
+    </ng-template>
 
-    <ion-card *ngFor="let image of myImageList" routerLink="/tabs/baby-memory/{{image.payload.doc.id}}">
+    <ion-card *ngFor="let image of myImageList" routerLink="/tabs/baby-memory/{{image.payload.doc.id}}" style="background:white;">
         <ion-card-title>
             {{image.payload.doc.data().title}}
-          </ion-card-title>
-          <img src="{{image.payload.doc.data().imageUrl}}"/>
+        </ion-card-title>
+        <img src="{{image.payload.doc.data().imageUrl}}" />
 
     </ion-card>
 </ion-content>

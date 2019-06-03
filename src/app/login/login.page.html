@@ -1,22 +1,46 @@
-<ion-content >
+<ion-content>
+  <img src="/assets/image/icon.png" alt="babyboss logo">
   <h1>BabyBoss Login</h1>
-  <form  [formGroup]="login" (submit)="emailLogin(login.value)">
-  <ion-list class="form-list">
-    <ion-item class="email">
-      <ion-label color="primary" stacked>Your Email</ion-label>
-      <ion-input  type="email" formControlName="email" clearInput></ion-input>
-    </ion-item>
-    <ion-item class="password">
-      <ion-label color="primary" stacked>Your Password</ion-label>
-      <ion-input type="password" formControlName="password" clearInput></ion-input>
-    </ion-item>
-  
-    <ion-button ion-button block color="primary"  type="submit" [disabled]="!login.valid">Login</ion-button>
-  </ion-list>
+  <div *ngIf="check">
+  <form [formGroup]="login" (submit)="emailLogin(login.value)">
+    <ion-list class="form-list">
+      <ion-item class="email">
+        <ion-label color="primary" stacked>Your Email</ion-label>
+        <ion-input type="email" formControlName="email" clearInput></ion-input>
+      </ion-item>
+      <ion-item class="password">
+        <ion-label color="primary" stacked>Your Password</ion-label>
+        <ion-input type="password" formControlName="password" clearInput></ion-input>
+      </ion-item>
+
+      <ion-button expand="block" color="primary" type="submit" [disabled]="!login.valid">Login</ion-button>
+    </ion-list>
   </form>
+</div>
+<div *ngIf="!check">
+  <ion-card>
+    <ion-card-header>
+      Your email register successfully but its look like not verification yet,Please verify to use the application.
+    </ion-card-header>
+    <ion-card-content>
+      Welcome {{fAuthService.afAuth.auth.currentUser?.email}}
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-button (click)="resendVerification()">Resend Verification</ion-button>
+          </ion-col>
+          <ion-col>
+              <ion-button (click)="refresh()">Refresh</ion-button>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-card-content>
+  </ion-card>
+</div>
   <label class="error-message">{{errorMessage}}</label>
-      <ion-button ion-button outline color="danger" round icon-start item-start [routerLink]="'/register/'" routerDirection="forward">
-          <ion-icon name='person-add'></ion-icon>
-        Register
-      </ion-button>
+  <h3>_____Become Our Member_____</h3>
+  <ion-button  expand="block" color="danger" round icon-start item-start [routerLink]="'/register/'" routerDirection="forward">
+    <ion-icon name='person-add'></ion-icon>
+    Register
+  </ion-button>
 </ion-content>

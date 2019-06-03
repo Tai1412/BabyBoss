@@ -46,7 +46,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.profile_form=new FormGroup({
       name:new FormControl('set your name',Validators.required),
-      email: new FormControl('',[ Validators.required,Validators.email,Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'),Validators.maxLength(30)]),
+      email: new FormControl({disabled:true},[ Validators.required,Validators.email,Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'),Validators.maxLength(30)]),
     });
    
   }

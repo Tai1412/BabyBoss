@@ -14,10 +14,11 @@ import { forkJoin } from 'rxjs';
 export class BabyTrackerPage implements OnInit {
   public babyList:Array<any>=[];
   public babyId:any;
-  data1:any;
-  data2:any;
-  data3:any;
-  data4:any;
+  public none:any;
+  babyTrackerData1:any;
+  babyTrackerData2:any;
+  babyTrackerData3:any;
+  babyTrackerData4:any;
   constructor(
     
     private afAuth:AngularFireAuth,
@@ -36,16 +37,21 @@ export class BabyTrackerPage implements OnInit {
     this.storage.get('babyId').then(val => {
       this.babyId = val
       console.log(this.babyId);
-      this.getData1();
+      if(this.babyId!=null){
+        this.getBabyData();
+      }
+      else{
+        this.none=null;
+      }
     })
     
   }
-  getData1(){
-    this.getData().subscribe(res=>{
-      this.data1=res[0];
-      this.data2=res[1];
-      this.data3=res[2];
-      this.data4=res[3];
+  getBabyData(){
+    this.getDataService().subscribe(res=>{
+      this.babyTrackerData1=res[0];//health
+      this.babyTrackerData2=res[1];//sleep
+      this.babyTrackerData3=res[2];//diaper
+      this.babyTrackerData4=res[3];//feeding
     })
   }
   getBabyTrackerHealth()
@@ -88,7 +94,7 @@ export class BabyTrackerPage implements OnInit {
       })
     });
   }
-  getData(){
+  getDataService(){
     let response1=this.getBabyTrackerHealth();
     let response2=this.getBabyTrackerSleep();
     let response3=this.getBabyTrackerDiaper();

@@ -32,9 +32,14 @@ export class BabyMemoryPage implements OnInit {
     this.storage.get('babyId').then(val => {
       this.babyId = val
       console.log(this.babyId);
+      if(this.babyId!=null){
       this.getImages().then(data => {
         this.myImageList = data;
       })
+    }
+    else{
+      this.myImageList=null;
+    }
     })
     
   }
