@@ -13,8 +13,11 @@ export class LoginPage implements OnInit {
 
   loading:any;
   errorMessage: string = '';
+  errorMessage1:string='';
   login: FormGroup;
   check:boolean;
+  reset:boolean=false;
+  resetPasswordForm:FormGroup;
 
   constructor(
     public loadingCtrl: LoadingController,
@@ -28,8 +31,12 @@ export class LoginPage implements OnInit {
       email: new FormControl('', Validators.required),
       password: new FormControl('', Validators.required)
     });
+    this.resetPasswordForm = new FormGroup({
+      email: new FormControl('', Validators.required),
+    });
   }
   ionViewWillEnter(){
+    this.reset=false;
     console.log("ionViewEnter");
     this.fAuthService.afAuth.authState.subscribe(user=>{
       if (user){
@@ -69,11 +76,26 @@ export class LoginPage implements OnInit {
         this.router.navigate(['/tabs']);
         this.showToast("Welcome Back"); 
         this.login.reset();
+        this.errorMessage="";
         }
       },500)
     }, err => this.errorMessage = err.message)
   }
-
+  resetMail()
+  {
+    this.reset=true;
+  }
+  resetEmailPassword(userValue)
+  {
+    this.fAuthService.emailPassWordReset(userValue)
+    .then(res =>{
+        this.router.navigate(['/login']);
+        this.reset=false;
+        this.resetPasswordForm.reset();
+        this.errorMessage1="";
+        this.showToast("Password reset mail sent,please check your mail"); 
+      },error => this.errorMessage1 = error.message)
+  }
   resendVerification(){
     let currentUser=this.fAuthService.afAuth.auth.currentUser; 
     if(!currentUser.emailVerified){

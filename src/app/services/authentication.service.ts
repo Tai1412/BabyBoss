@@ -36,6 +36,14 @@ export class AuthenticationService {
       .catch((error) =>{reject(error)});
     })
    }
+   //reset password
+   async emailPassWordReset(userValue){
+    return new Promise<any>((resolve, reject) => {
+      this.afAuth.auth.sendPasswordResetEmail(userValue.email)
+      .then(res => {resolve(res);})
+      .catch((error) =>{reject(error)});
+    })
+   }
    async getCurrentUser(){
      return new Promise<any>((resolve,reject)=>{
        this.afAuth.auth.onAuthStateChanged(user=>{

@@ -14,8 +14,10 @@
       </ion-item>
 
       <ion-button expand="block" color="primary" type="submit" [disabled]="!login.valid">Login</ion-button>
+      <label class="error-message">{{errorMessage}}</label>
     </ion-list>
   </form>
+  <a (click)="resetMail()">Forgot password?</a>
 </div>
 <div *ngIf="!check">
   <ion-card>
@@ -37,7 +39,19 @@
     </ion-card-content>
   </ion-card>
 </div>
-  <label class="error-message">{{errorMessage}}</label>
+<div *ngIf="reset">
+    <form [formGroup]="resetPasswordForm" (submit)="resetEmailPassword(resetPasswordForm.value)">
+      <ion-list class="form-list">
+        <ion-item class="email">
+          <ion-label color="primary" stacked>Your Email</ion-label>
+          <ion-input type="email" formControlName="email" clearInput></ion-input>
+        </ion-item>
+  
+        <ion-button expand="block" color="primary" type="submit" [disabled]="!resetPasswordForm.valid">Sent Link Reset Password</ion-button>
+        <ion-label class="error-message">{{errorMessage1}}</ion-label>
+      </ion-list>
+    </form>
+  </div>
   <h3>_____Become Our Member_____</h3>
   <ion-button  expand="block" color="danger" round icon-start item-start [routerLink]="'/register/'" routerDirection="forward">
     <ion-icon name='person-add'></ion-icon>
