@@ -24,9 +24,10 @@ export class BabyTrackerDiaperPage implements OnInit {
 
   ngOnInit() {
     this.tracker_diaper_form=new FormGroup({
-      time:new FormControl(''),
+      time:new FormControl(new Date().toISOString()),
       status:new FormControl(''),
     });
+    this.refreshForm()
     this.storage.get('babyId').then(val => {
       this.babyId = val
     })
@@ -51,6 +52,12 @@ export class BabyTrackerDiaperPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  refreshForm(){
+    this.tracker_diaper_form.patchValue({
+      time:new Date(),
+      status:status, // does not work
+  });
   }
 
 }

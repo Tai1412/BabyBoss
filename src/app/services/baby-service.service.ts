@@ -84,4 +84,43 @@ export class BabyServiceService {
       });
     })
   }
+  getBabyMemoryById(babyId: string) {
+    let currentUser=this.afAuth.auth.currentUser;
+    return this.afs.collection('User').doc(currentUser.uid).collection("Baby").doc(babyId).collection("images").valueChanges();
+  }
+  getBabySleepById(babyId: string) {
+    let currentUser=this.afAuth.auth.currentUser;
+    return this.afs.collection('User').doc(currentUser.uid).collection("Baby").doc(babyId).collection("babySleep").valueChanges();
+  }
+  getBabyHealthRecordById(babyId: string) {
+    let currentUser=this.afAuth.auth.currentUser;
+    return this.afs.collection('User').doc(currentUser.uid).collection("Baby").doc(babyId).collection("babyHealthRecord").valueChanges();
+  }
+  getBabyDiaperById(babyId: string) {
+    let currentUser=this.afAuth.auth.currentUser;
+    return this.afs.collection('User').doc(currentUser.uid).collection("Baby").doc(babyId).collection("babyDiaper").valueChanges();
+  }
+  getBabyFeedingrById(babyId: string) {
+    let currentUser=this.afAuth.auth.currentUser;
+    return this.afs.collection('User').doc(currentUser.uid).collection("Baby").doc(babyId).collection("babyFeeding").valueChanges();
+  }
+
+  deleteFieldChooseBaby(babyId)
+  {
+    return new Promise<any>((resolve, reject) => {
+      let currentUser = this.afAuth.auth.currentUser;
+      this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(babyId).update(
+        {
+          chooseBaby:false
+        }
+      )
+      .then((res) => 
+      {
+        resolve(res)
+      })
+      .catch((err)=>{
+         reject(err)
+      });
+    })
+  }
 }

@@ -25,12 +25,6 @@ export class ProfilePage implements OnInit {
     'name':[
       {type:'required',message:'Name is required.'},
     ],
-    'email': [
-      { type: 'required', message: 'Email is required' },
-      { type: 'email', message: 'Please enter the valid email' },
-      { type: 'maxlength', message: 'The email only accept 20 characters before @gmail.com' },
-      { type: 'pattern', message: 'The email only accept gmail.com and more than 5 characters long' }
-    ]
   };
   constructor(
     public afAuthService: AuthenticationService,
@@ -46,7 +40,7 @@ export class ProfilePage implements OnInit {
   ngOnInit() {
     this.profile_form=new FormGroup({
       name:new FormControl('set your name',Validators.required),
-      email: new FormControl({disabled:true},[ Validators.required,Validators.email,Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'),Validators.maxLength(30)]),
+      email: new FormControl({disabled:true}),
     });
    
   }

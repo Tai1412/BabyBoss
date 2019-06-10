@@ -2,33 +2,65 @@
   <ion-toolbar>
     <ion-title>Your Baby Detail</ion-title>
     <ion-buttons slot="end">
-        <ion-button (click)="deleteBaby()">
-            <ion-icon name="trash"></ion-icon>
-        </ion-button>
+      <ion-button (click)="deleteBaby()">
+        <ion-icon name="trash"></ion-icon>
+      </ion-button>
     </ion-buttons>
     <ion-buttons slot="start">
-        <ion-back-button  (click)="goBack()"></ion-back-button>
-      </ion-buttons>
+      <ion-back-button (click)="goBack()"></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="updateBabyForm" (submit)="updateBabySubmit(updateBabyForm.value)">
-        <ion-item>
-          <ion-label position="stacked" color="primary">Your Baby Name</ion-label>
-          <ion-input type="text" formControlName="name" placeholder="{{baby?.name}}" required></ion-input>
+  <form [formGroup]="updateBabySelectForm">
+      <ion-item>
+          <ion-label>Select</ion-label>
+          <ion-checkbox formControlName="chooseBaby" ></ion-checkbox>
         </ion-item>
-        <ion-item>
-          <ion-label position="stacked" color="primary">Your Baby Age</ion-label>
-          <ion-input type="text" formControlName="age" placeholder="{{baby?.age}}"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="stacked" color="primary">Your Baby Gender</ion-label>
-            <ion-select multiple="false" interface="popover" formControlName="gender" placeholder="{{baby?.gender}}">
-              <ion-select-option value="boy">Boy</ion-select-option>
-              <ion-select-option value="girl">Girl</ion-select-option>
-            </ion-select>
-        </ion-item>
-        <ion-button ion-button block type="submit" [disabled]="!updateBabyForm.valid">Change Baby Detail</ion-button>
-      </form>
+  </form>
+      <ion-button ion-button (click)="selectBaby(updateBabySelectForm.value)" [hidden]="!updateBabySelectForm.dirty || !updateBabySelectForm.valid">
+        SAVE
+      </ion-button>
+  <ion-card>
+  <form [formGroup]="updateBabyForm" (submit)="updateBabySubmit(updateBabyForm.value)">
+    <ion-item>
+      <ion-label position="stacked" color="primary">Your Baby Name</ion-label>
+      <ion-input type="text" formControlName="name" placeholder="{{baby?.name}}" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Your Baby Age</ion-label>
+      <ion-input type="text" formControlName="age" placeholder="{{baby?.age}}"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="stacked" color="primary">Your Baby Gender</ion-label>
+      <ion-select multiple="false" interface="popover" formControlName="gender" placeholder="{{baby?.gender}}">
+        <ion-select-option value="boy">Boy</ion-select-option>
+        <ion-select-option value="girl">Girl</ion-select-option>
+      </ion-select>
+    </ion-item>
+    
+    <ion-button ion-button expand="block" type="submit" [disabled]="!updateBabyForm.valid">Change Baby Detail</ion-button>
+  </form>
+</ion-card>
+  <ion-chip color="primary">
+    <ion-icon name="camera"></ion-icon>
+    <ion-label>Baby Memory: {{babyMemoryCount.length}}</ion-label>
+  </ion-chip>
+  <ion-chip color="primary">
+      <ion-icon name="bed"></ion-icon>
+      <ion-label>Baby Sleeping: {{babySleepingCount.length}}</ion-label>
+    </ion-chip>
+    <ion-chip color="primary">
+        <ion-icon name="repeat"></ion-icon>
+        <ion-label>Baby Diaper: {{babyDiaperCount.length}}</ion-label>
+      </ion-chip>
+      <ion-chip color="primary">
+          <ion-icon name="thermometer"></ion-icon>
+          <ion-label>Baby Health Record: {{babyHealthRecordCount.length}}</ion-label>
+        </ion-chip>
+        <ion-chip color="primary">
+            <ion-icon name="restaurant"></ion-icon>
+            <ion-label>Baby Feeding: {{babyFeedingCount.length}}</ion-label>
+          </ion-chip>
 </ion-content>
