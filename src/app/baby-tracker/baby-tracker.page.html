@@ -10,7 +10,7 @@
       <ion-avatar slot="start">
         <img src="/assets/image/icon.png">
       </ion-avatar>
-      <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}}<br />Gender:
+      <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}} {{babyList.ageType}}<br />Gender:
         {{babyList.gender}}</ion-label>
     </ion-item>
     <ion-card *ngFor="let data of babyTrackerData1" style="background:white">

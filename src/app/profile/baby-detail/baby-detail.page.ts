@@ -27,6 +27,14 @@ export class BabyDetailPage implements OnInit {
   babyFeedingCount: any;
   baby: any;
   public selectedId: any;
+  validation_messages = {
+    'ageType': [
+      { type: 'required', message: 'Age Type is required' },
+    ],
+    'age':[
+      {type:'required', messages:"Age is require"}
+    ]
+  };
   constructor(
     private firebaseService: BabyServiceService,
     private route: ActivatedRoute,
@@ -38,7 +46,7 @@ export class BabyDetailPage implements OnInit {
   ) {
     this.baby = this.firebaseService.getBabyDetail(this.babyId).subscribe(data => {
       this.baby = data;
-      this.updateBaby(this.baby.age, this.baby.name, this.baby.gender);
+      this.updateBaby(this.baby.age, this.baby.name, this.baby.gender,this.baby.ageType);
       this.updateBabySelect(this.baby.chooseBaby)
       console.log(this.babyId)
     })
@@ -63,7 +71,8 @@ export class BabyDetailPage implements OnInit {
       console.log(this.babyHealthRecordCount)
     })
     this.updateBabyForm = this.formBuilder.group({
-      age: new FormControl(this.baby.age),
+      age: new FormControl(this.baby.age,Validators.required),
+      ageType:new FormControl(this.baby.ageType,Validators.required),
       name: new FormControl(this.baby.name),
       gender: new FormControl(this.baby.gender),
     });
@@ -79,9 +88,10 @@ export class BabyDetailPage implements OnInit {
       this.previousBaby=val
     })
   }
-  updateBaby(age, name, gender) {
+  updateBaby(age, name, gender,ageType) {
     this.updateBabyForm.patchValue({
       age: age,
+      ageType:ageType,
       name: name,
       gender: gender,
     })
@@ -94,6 +104,7 @@ export class BabyDetailPage implements OnInit {
   updateBabySubmit(value) {
     let data = {
       age: value.age,
+      ageType:value.ageType,
       name: value.name,
       gender: value.gender,
     }

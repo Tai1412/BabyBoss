@@ -34,6 +34,7 @@ export class BabyServiceService {
       this.afs.collection("User").doc(currentUser.uid).collection("Baby").add({
         gender:value.gender,
         age:value.age,
+        ageType:value.ageType,
         name:value.name,
       })
       .then((res)=>{

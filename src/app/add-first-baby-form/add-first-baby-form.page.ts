@@ -23,7 +23,8 @@ export class AddFirstBabyFormPage implements OnInit {
 
   ngOnInit() {
     this.addFirstBabyForm = this.formBuilder.group({
-      age: new FormControl(''),
+      age: new FormControl(Validators.required),
+      ageType:new FormControl(Validators.required),
       name: new FormControl(''),
       gender: new FormControl('Gender not choose'),
       });
@@ -31,6 +32,7 @@ export class AddFirstBabyFormPage implements OnInit {
   onSubmit(value){
     let data = {
       age: value.age,
+      ageType:value.ageType,
       name: value.name,
       gender:value.gender,
     }
