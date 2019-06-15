@@ -17,7 +17,6 @@ export class RegisterPage implements OnInit {
       { type: 'required', message: 'Email is required' },
       { type: 'email', message: 'Please enter the valid email' },
       { type: 'maxlength', message: 'The email only accept 20 characters before @gmail.com' },
-      { type: 'pattern', message: 'The email only accept gmail.com and more than 5 characters long' }
     ],
     'password': [
       { type: 'required', message: 'Password is required' },
@@ -33,7 +32,7 @@ export class RegisterPage implements OnInit {
 
   ngOnInit() {
     this.signupForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email, Validators.pattern('^[a-z0-9](\.?[a-z0-9]){5,}@g(oogle)?mail\.com$'), Validators.maxLength(30)]),
+      email: new FormControl('', [Validators.required, Validators.email, Validators.maxLength(30)]),
       password: new FormControl('', [Validators.required, Validators.minLength(6)]),
       termsAccept: new FormControl(false, Validators.pattern('true'))
     });

@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+      <ion-buttons slot="start">
+          <ion-back-button  defaultHref="tabs/baby-tracker"></ion-back-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="deleteBabyTrackerSleep()">
+                <ion-icon name="trash"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <h3 style="margin-left: 10px">Baby Sleeping Time</h3>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+    <form [formGroup]="sleep_form" (submit)="updateBabyTrackerSleepSubmit(sleep_form.value)">
+        <ion-item>
+            <ion-label position="stacked" color="primary">Start Time</ion-label>
+            <ion-datetime formControlName="startTime" display-Format="DD MMMM YYYY hh:mm A">
+            </ion-datetime>
+          </ion-item>
+        <ion-item>
+          <ion-label position="stacked" color="primary">End Time</ion-label>
+          <ion-datetime formControlName="endTime" display-Format="DD MMMM YYYY hh:mm A">
+            </ion-datetime>
+        </ion-item>
+        <ion-button ion-button block type="submit" [disabled]="!sleep_form.valid">Update</ion-button>
+      </form>
+</ion-content>

@@ -13,42 +13,42 @@
       <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}} {{babyList.ageType}}<br />Gender:
         {{babyList.gender}}</ion-label>
     </ion-item>
-    <ion-card *ngFor="let data of babyTrackerData1" style="background:white">
+    <ion-card *ngFor="let babyHealthRecord of babyTrackerData1" routerLink="/tabs/baby-tracker/baby-tracker-health/{{babyHealthRecord.payload.doc.id}}" style="background:white">
         <ion-card-header>
-          Time:{{ data.payload.doc.data().time }}
+          Time:{{ babyHealthRecord.payload.doc.data().time }}
         </ion-card-header>
         <ion-card-content>
-          Health Record: {{ data.payload.doc.data().healthRecord }}
+          Health Record: {{ babyHealthRecord.payload.doc.data().healthRecord }}
         </ion-card-content>
       </ion-card>
     
-      <ion-card *ngFor="let data of babyTrackerData2" style="background:white">
+      <ion-card *ngFor="let babySleep of babyTrackerData2" routerLink="/tabs/baby-tracker/baby-tracker-sleep/{{babySleep.payload.doc.id}}" style="background:white">
           <ion-card-header>
-           start Time:{{ data.payload.doc.data().startTime }}
+           start Time:{{ babySleep.payload.doc.data().startTime }}
           </ion-card-header>
           <ion-card-content>
-            end time: {{ data.payload.doc.data().endTime }}
+            end time: {{ babySleep.payload.doc.data().endTime }}
           </ion-card-content>
         </ion-card>
     
-        <ion-card *ngFor="let data of babyTrackerData3" style="background:white">
+        <ion-card *ngFor="let babyDiaper of babyTrackerData3" routerLink="/tabs/baby-tracker/baby-tracker-diaper/{{babyDiaper.payload.doc.id}}" style="background:white">
             <ion-card-header>
-              Time:{{ data.payload.doc.data().time }}
+              Time:{{ babyDiaper.payload.doc.data().time }}
             </ion-card-header>
             <ion-card-content>
-              Status: {{ data.payload.doc.data().status }}
+              Status: {{ babyDiaper.payload.doc.data().status }}
             </ion-card-content>
           </ion-card>
     
-          <ion-card *ngFor="let data of babyTrackerData4" style="background:white">
+          <ion-card *ngFor="let babyFeeding of babyTrackerData4" routerLink="/tabs/baby-tracker/baby-tracker-feeding/{{babyFeeding.payload.doc.id}}" style="background:white">
               <ion-card-header>
-                Time:{{ data.payload.doc.data().time }}
+                Time:{{ babyFeeding.payload.doc.data().time }}
               </ion-card-header>
               <ion-card-content>
-                Milk: {{ data.payload.doc.data().milk }}
+                Milk: {{ babyFeeding.payload.doc.data().milk }}
               </ion-card-content>
               <ion-card-content>
-                Food: {{ data.payload.doc.data().food }}
+                Food: {{ babyFeeding.payload.doc.data().food }}
               </ion-card-content>
             </ion-card>
   </div>

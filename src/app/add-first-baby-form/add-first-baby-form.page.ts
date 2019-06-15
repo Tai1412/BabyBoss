@@ -41,6 +41,7 @@ export class AddFirstBabyFormPage implements OnInit {
     .then(
       res => {
         this.router.navigate(['/tabs']);
+        this.addFirstBabyForm.reset();
         this.showToast("Successful Add Baby");
       }
     )

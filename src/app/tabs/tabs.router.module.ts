@@ -93,6 +93,22 @@ const routes: Routes = [
               },
           ]
           },
+          {
+            path:'baby-tracker-health/:RecordId',
+            loadChildren:'../baby-tracker/baby-tracker-health-detail/baby-tracker-health-detail.module#BabyTrackerHealthDetailPageModule'
+          },
+          {
+            path:'baby-tracker-diaper/:DiaperId',
+            loadChildren:'../baby-tracker/baby-tracker-diaper-detail/baby-tracker-diaper-detail.module#BabyTrackerDiaperDetailPageModule'
+          },
+          {
+            path:'baby-tracker-feeding/:FeedingId',
+            loadChildren:'../baby-tracker/baby-tracker-feeding-detail/baby-tracker-feeding-detail.module#BabyTrackerFeedingDetailPageModule'
+          },
+          {
+            path:'baby-tracker-sleep/:SleepId',
+            loadChildren:'../baby-tracker/baby-tracker-sleep-detail/baby-tracker-sleep-detail.module#BabyTrackerSleepDetailPageModule'
+          },
         ]
       },
       {
