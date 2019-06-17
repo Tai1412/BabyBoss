@@ -13,6 +13,9 @@
       <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}} {{babyList.ageType}}<br />Gender:
         {{babyList.gender}}</ion-label>
     </ion-item>
+    <ion-list-header>
+        <ion-label><ion-icon name="heart-half" color="danger"></ion-icon>Baby Health Record</ion-label>
+    </ion-list-header>
     <ion-card *ngFor="let babyHealthRecord of babyTrackerData1" routerLink="/tabs/baby-tracker/baby-tracker-health/{{babyHealthRecord.payload.doc.id}}" style="background:white">
         <ion-card-header>
           Time:{{ babyHealthRecord.payload.doc.data().time }}
@@ -22,6 +25,9 @@
         </ion-card-content>
       </ion-card>
     
+      <ion-list-header>
+          <ion-label><ion-icon name="bed" color="secondary"></ion-icon>Baby Sleep</ion-label>
+        </ion-list-header>
       <ion-card *ngFor="let babySleep of babyTrackerData2" routerLink="/tabs/baby-tracker/baby-tracker-sleep/{{babySleep.payload.doc.id}}" style="background:white">
           <ion-card-header>
            start Time:{{ babySleep.payload.doc.data().startTime }}
@@ -31,6 +37,9 @@
           </ion-card-content>
         </ion-card>
     
+        <ion-list-header>
+            <ion-label><ion-icon name="repeat" color="tertiary"></ion-icon>Baby Diaper</ion-label>
+          </ion-list-header>
         <ion-card *ngFor="let babyDiaper of babyTrackerData3" routerLink="/tabs/baby-tracker/baby-tracker-diaper/{{babyDiaper.payload.doc.id}}" style="background:white">
             <ion-card-header>
               Time:{{ babyDiaper.payload.doc.data().time }}
@@ -40,6 +49,9 @@
             </ion-card-content>
           </ion-card>
     
+          <ion-list-header>
+              <ion-label><ion-icon name="restaurant" color="success"></ion-icon>Baby Feed</ion-label>
+            </ion-list-header>
           <ion-card *ngFor="let babyFeeding of babyTrackerData4" routerLink="/tabs/baby-tracker/baby-tracker-feeding/{{babyFeeding.payload.doc.id}}" style="background:white">
               <ion-card-header>
                 Time:{{ babyFeeding.payload.doc.data().time }}
@@ -52,7 +64,7 @@
               </ion-card-content>
             </ion-card>
   </div>
-  <ng-template #noBaby>
+  <ng-template #noBaby> 
     <ion-item lines="none">
       <ion-avatar slot="start">
         <img src="/assets/image/icon.png">
@@ -64,7 +76,7 @@
   
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
     <ion-fab-button routerLink="/tabs/baby-tracker/baby-tracker-menu" [disabled]="babyId==null">
-      <ion-icon name="add"></ion-icon>
+      <ion-icon class="icon-fab"name="add"></ion-icon>
     </ion-fab-button>
   </ion-fab>
 </ion-content>

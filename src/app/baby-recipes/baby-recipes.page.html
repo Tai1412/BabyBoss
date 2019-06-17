@@ -20,6 +20,8 @@
       </ion-card>
     </div> -->
     <ion-grid *ngIf="isLoaded" >
+      <ion-searchbar (ionInput)="filterBabyRecipe($event)" placeholder="Search By Recipe Title" animated></ion-searchbar>
+      <div *ngIf="!babyRecipes.length==0; else noRecipe">
       <ion-row *ngFor="let babyRecipe of babyRecipes" routerLink="/tabs/baby-recipes/{{babyRecipe.payload.doc.id}}" style="text-align: center;margin-top:10px;">
         <ion-col>
             <img src="{{babyRecipe.payload.doc.data().image}}"/>
@@ -38,6 +40,15 @@
           </ion-row>
         </ion-col>
       </ion-row>
+      </div>
+      <ng-template #noRecipe>
+          <ion-item lines="none">
+            <ion-avatar slot="start">
+              <img src="https://www.onlygfx.com/wp-content/uploads/2018/04/no-stamp-2-1024x1024.png">
+            </ion-avatar>
+            <ion-label> No Baby Recipe Match</ion-label>
+          </ion-item>
+        </ng-template>
     </ion-grid>
 
     <ion-grid *ngIf="!isLoaded" >
