@@ -3,27 +3,38 @@
       <ion-buttons slot="start">
           <ion-back-button  defaultHref="tabs/baby-tracker"></ion-back-button>
         </ion-buttons>
-    <ion-title>baby-tracker-menu</ion-title>
+    <ion-title>Baby Tracker Menu</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
     <ion-grid>
+        <ion-item lines="none" >
+            <ion-avatar slot="start">
+              <img src="/assets/image/icon.png">
+            </ion-avatar>
+            <ion-label>Name: {{babyList.name}}<br />Age: {{babyList.age}} {{babyList.ageType}}<br />Gender:
+              {{babyList.gender}}</ion-label>
+          </ion-item>
         <div style="text-align: center; margin-top: 50px;">
         <ion-row style="height:100px;">
           <ion-col style="background:#F9D2D3;" routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-sleep" >
-            Sleep
+            Sleep<br><br>
+            <ion-icon name="bed" color="secondary"></ion-icon>
           </ion-col>
           <ion-col style="background:#77d353; margin-left:30px;" routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-diaper">
-            Diaper
+            Diaper<br><br>
+            <ion-icon name="repeat" color="tertiary"></ion-icon>
           </ion-col>
         </ion-row >
         <ion-row style="margin-top:40px;height:100px;">
           <ion-col style="background:#13ceb1;" routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-feeding">
-            Feeding
+            Feeding<br><br>
+            <ion-icon name="restaurant" color="warning"></ion-icon>
           </ion-col>
           <ion-col style="background:#ff9052; margin-left:30px;" routerLink="/tabs/baby-tracker/baby-tracker-menu/baby-tracker-health">
-            Health
+            Health<br><br>
+            <ion-icon name="heart-half" color="danger"></ion-icon>
           </ion-col>
         </ion-row>
         </div>

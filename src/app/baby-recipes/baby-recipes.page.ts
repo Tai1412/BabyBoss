@@ -16,11 +16,9 @@ export class BabyRecipesPage implements OnInit {
 
   ngOnInit() {
     this.firebaseService.getBabyRecipes().then(data=>{
-     setTimeout(()=>{
        this.isLoaded=true;
        this.babyRecipes=data;
        this.loadedBabyRecipe=data;
-     },4000)
     })
   }
   initializeBabyRecipe():void{

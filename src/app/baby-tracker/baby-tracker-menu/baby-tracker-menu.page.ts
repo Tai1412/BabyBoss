@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-baby-tracker-menu',
@@ -6,10 +7,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./baby-tracker-menu.page.scss'],
 })
 export class BabyTrackerMenuPage implements OnInit {
-
-  constructor() { }
+  public babyList:Array<any>=[];
+  constructor(
+    private storage:Storage,
+  ) { }
 
   ngOnInit() {
+  }
+  ionViewWillEnter(){
+    this.storage.get('babyDetail').then(val =>{
+        this.babyList=val
+        console.log(this.babyList)
+    })
+    
   }
 
 }

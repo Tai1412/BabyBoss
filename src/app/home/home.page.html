@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-    <ion-item [routerLink]="'/tabs/home/tips-for-mom/'" routerDirection="forward" lines="none">Tips For Mom</ion-item>
-    <ion-item [routerLink]="'/tabs/home/tips-for-dad/'" routerDirection="forward"lines="none">Tips For Dad</ion-item>
-    <ion-item [routerLink]="'/tabs/home/baby-tips/'" routerDirection="forward"lines="none">Baby Tips</ion-item>
+    <ion-item [routerLink]="'/tabs/home/tips-for-mom/'" routerDirection="forward" lines="none">Tips For Mom<ion-badge slot="end" color="secondary">{{momTipCount?.length}}</ion-badge></ion-item>
+    <ion-item [routerLink]="'/tabs/home/tips-for-dad/'" routerDirection="forward"lines="none">Tips For Dad<ion-badge slot="end" color="secondary">{{dadTipCount?.length}}</ion-badge></ion-item>
+    <ion-item [routerLink]="'/tabs/home/baby-tips/'" routerDirection="forward"lines="none">Baby Tips<ion-badge slot="end" color="secondary">{{babyTipCount?.length}}</ion-badge></ion-item>
 </ion-content>
