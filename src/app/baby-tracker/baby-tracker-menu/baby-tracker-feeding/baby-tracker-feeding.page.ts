@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 @Component({
   selector: 'app-baby-tracker-feeding',
   templateUrl: './baby-tracker-feeding.page.html',
@@ -19,6 +19,7 @@ export class BabyTrackerFeedingPage implements OnInit {
     private storage: Storage,
     private router:Router,
     private toastCtrl:ToastController,
+    private loadingCtrl:LoadingController
   ) { }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class BabyTrackerFeedingPage implements OnInit {
     })
   }
   createBabyTrackerFeeding(value){
+    this.showLoading("Creating...")
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babyFeeding").add({
@@ -40,6 +42,7 @@ export class BabyTrackerFeedingPage implements OnInit {
         food:value.food
       })
       .then(res=>{
+        this.loadingCtrl.dismiss();
         this.router.navigate(["tabs/baby-tracker"]);
         this.showToast("Added Successfully");
         resolve(res)
@@ -53,5 +56,11 @@ export class BabyTrackerFeedingPage implements OnInit {
     });
     toast.present();
   }
-
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+    });
+    loading.present();
+  }
 }

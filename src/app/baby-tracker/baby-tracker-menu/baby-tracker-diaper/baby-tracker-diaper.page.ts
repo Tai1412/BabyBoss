@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-baby-tracker-diaper',
@@ -19,7 +19,8 @@ export class BabyTrackerDiaperPage implements OnInit {
     private afs:AngularFirestore,
     private storage: Storage,
     private router:Router,
-    private toastCtrl:ToastController
+    private toastCtrl:ToastController,
+    private loadingCtrl:LoadingController,
   ) { }
 
   ngOnInit() {
@@ -33,6 +34,7 @@ export class BabyTrackerDiaperPage implements OnInit {
     })
   }
   createBabyTrackDiaper(value){
+    this.showLoading("Creating...")
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babyDiaper").add({
@@ -40,6 +42,7 @@ export class BabyTrackerDiaperPage implements OnInit {
         status:value.status
       })
       .then(res=>{
+        this.loadingCtrl.dismiss();
         this.router.navigate(["tabs/baby-tracker"]);
         this.showToast("Added Successfully");
         resolve(res)
@@ -58,6 +61,13 @@ export class BabyTrackerDiaperPage implements OnInit {
       time:new Date().toDateString(),
       status:status, // does not work
   });
+  }
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+    });
+    loading.present();
   }
 
 }

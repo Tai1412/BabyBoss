@@ -2,7 +2,7 @@ import { Component, OnInit, Injectable } from '@angular/core';
 import { BabyServiceService } from 'src/app/services/baby-service.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
-import { ToastController } from '@ionic/angular';
+import { ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 @Component({
@@ -42,6 +42,8 @@ export class BabyDetailPage implements OnInit {
     public router: Router,
     private toastCtrl: ToastController,
     private storage: Storage,
+    private alertCtrl: AlertController,
+    private loadingCtrl:LoadingController,
 
   ) {
     this.baby = this.firebaseService.getBabyDetail(this.babyId).subscribe(data => {
@@ -157,13 +159,7 @@ export class BabyDetailPage implements OnInit {
       )
   }
   deleteBaby() {
-    this.firebaseService.deleteBabyService(this.babyId)
-      .then(res => {
-        this.router.navigate(['/tabs/profile']);
-        this.storage.remove('babyId');
-        this.storage.remove('babyDetail');
-        this.showToast("Successful Deleted Baby");
-      })
+    this.showConfirm();
   }
   async showToast(message) {
     const toast = await this.toastCtrl.create({
@@ -199,4 +195,42 @@ export class BabyDetailPage implements OnInit {
   //       console.log(this.check)
   //     }
   // }
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+    });
+    loading.present();
+  }
+  async showConfirm(){
+    const confirm = await this.alertCtrl.create({
+      header: 'Confirm',
+      subHeader: 'Do you want to delete ?',
+      message:'Its will be permanently deleted',
+      buttons: [
+        {
+          text: 'No',
+          handler: () => {}
+        },
+        {
+          text: 'Yes',//if yes run delete memory
+          handler: () => {
+            this.showLoading("Proccessing....")
+            this.firebaseService.deleteBabyService(this.babyId)
+            .then((res) =>{
+                this.loadingCtrl.dismiss()
+                this.router.navigate(['/tabs/profile']);
+                this.storage.remove('babyId');
+                this.storage.remove('babyDetail');
+                this.showToast("Successful Deleted Baby");
+               })
+             .catch((err) =>{
+                console.log(err)
+             });
+          }
+        }
+      ]
+    });
+    confirm.present();
+  }
 }

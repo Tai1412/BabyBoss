@@ -3,7 +3,7 @@ import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms'
 import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-baby-tracker-sleep',
@@ -18,7 +18,8 @@ export class BabyTrackerSleepPage implements OnInit {
     private afs:AngularFirestore,
     private storage: Storage,
     private router:Router,
-    private toastCtrl:ToastController
+    private toastCtrl:ToastController,
+    private loadingCtrl:LoadingController,
   ) { }
 
   ngOnInit() {
@@ -31,6 +32,7 @@ export class BabyTrackerSleepPage implements OnInit {
     })
   }
   createBabyTrackerSleep(value){
+    this.showLoading("Creating...")
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babySleep").add({
@@ -38,6 +40,7 @@ export class BabyTrackerSleepPage implements OnInit {
         endTime:value.endTime
       })
       .then(res=>{
+        this.loadingCtrl.dismiss();
         this.router.navigate(["tabs/baby-tracker"]);
         this.showToast("Added Successfully!")
         resolve(res)
@@ -51,5 +54,12 @@ export class BabyTrackerSleepPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+    });
+    loading.present();
   }
 }

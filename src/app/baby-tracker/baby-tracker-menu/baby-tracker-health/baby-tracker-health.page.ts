@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 import { AngularFireAuth } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Router } from '@angular/router';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-baby-tracker-health',
@@ -19,7 +19,8 @@ export class BabyTrackerHealthPage implements OnInit {
     private afs:AngularFirestore,
     private storage: Storage,
     private router:Router,
-    private toastCtrl:ToastController
+    private toastCtrl:ToastController,
+    private loadingCtrl:LoadingController,
   ) { }
 
   ngOnInit() {
@@ -32,6 +33,7 @@ export class BabyTrackerHealthPage implements OnInit {
     })
   }
   createBabyTrackerHealth(value){
+    this.showLoading("Creating...");
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babyHealthRecord").add({
@@ -39,6 +41,7 @@ export class BabyTrackerHealthPage implements OnInit {
         healthRecord:value.healthRecord
       })
       .then(res=>{
+        this.loadingCtrl.dismiss();
         this.router.navigate(["tabs/baby-tracker"]);
         this.showToast("Added Successfully");
         resolve(res)
@@ -51,6 +54,13 @@ export class BabyTrackerHealthPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+    });
+    loading.present();
   }
 
 }

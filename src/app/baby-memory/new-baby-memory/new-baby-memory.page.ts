@@ -6,7 +6,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase/app';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { Storage } from '@ionic/storage';
-import { ToastController } from '@ionic/angular';
+import { ToastController, LoadingController } from '@ionic/angular';
 import { Router } from '@angular/router';
 
 @Component({
@@ -30,6 +30,8 @@ export class NewBabyMemoryPage implements OnInit {
     public router:Router,
     private storage: Storage,
     public toastCtrl: ToastController,
+    private loadingCtrl:LoadingController,
+
 
 
   ) { }
@@ -46,6 +48,26 @@ export class NewBabyMemoryPage implements OnInit {
     const optionsGallery: CameraOptions = {
       quality: 100,
       sourceType: this.camera.PictureSourceType.PHOTOLIBRARY,
+      destinationType: this.camera.DestinationType.DATA_URL,
+      encodingType: this.camera.EncodingType.JPEG,
+      mediaType: this.camera.MediaType.PICTURE,
+      correctOrientation: true,//will correct view
+      allowEdit: true,
+      targetWidth: 400,
+      targetHeight: 400,
+    }
+
+    this.camera.getPicture(optionsGallery).then((data) => {
+      this.myPhoto = 'data:image/jpeg;base64,' + data;
+    }, (err) => {
+      // Handle error
+      console.log(err)
+    })
+  }
+  takePhotoBabyMemoryPicture() {
+    const optionsGallery: CameraOptions = {
+      quality: 100,
+      sourceType: this.camera.PictureSourceType.CAMERA,
       destinationType: this.camera.DestinationType.DATA_URL,
       encodingType: this.camera.EncodingType.JPEG,
       mediaType: this.camera.MediaType.PICTURE,
@@ -82,13 +104,14 @@ export class NewBabyMemoryPage implements OnInit {
 
   // }
   createBabyMemory(value) {
+    this.showLoading("Proccessing...");
     return new Promise<any>((resolve, reject) => {
       let currentUser = this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("images").add({
         title: value.title,
         imageUrl: this.myPhoto//from takeBabyMemoryPicture
-      })
-        .then(
+      })        
+      .then(
           res => {
             //       if(this.myPhoto!=null){
             //         const storageRef=firebase.storage().ref();
@@ -103,6 +126,7 @@ export class NewBabyMemoryPage implements OnInit {
             //   })
             // });
             //       }
+            this.loadingCtrl.dismiss();
             this.router.navigate(["/tabs/baby-memory"]);
             this.showToast("Added Successfully")
             resolve(res)
@@ -146,5 +170,12 @@ export class NewBabyMemoryPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+  async showLoading(message){
+    const loading = await this.loadingCtrl.create({
+      message: message,
+      spinner:'dots',
+    });
+    loading.present();
   }
 }
