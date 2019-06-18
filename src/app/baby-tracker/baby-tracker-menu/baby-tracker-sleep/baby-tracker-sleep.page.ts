@@ -36,8 +36,8 @@ export class BabyTrackerSleepPage implements OnInit {
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babySleep").add({
-        startTime:value.startTime,
-        endTime:value.endTime
+        startTime:new Date(value.startTime).getUTCDate(),
+        endTime:new Date(value.endTime).getTimezoneOffset()
       })
       .then(res=>{
         this.loadingCtrl.dismiss();

@@ -153,6 +153,10 @@ const routes: Routes = [
             loadChildren: '../profile/terms-and-condition/terms-and-condition.module#TermsAndConditionPageModule'
           },
           {
+            path: 'privacy',
+            loadChildren: '../profile/privacy/privacy.module#PrivacyPageModule'
+          },
+          {
             path: ':id',
             loadChildren: '../profile/baby-detail/baby-detail.module#BabyDetailPageModule'
           }

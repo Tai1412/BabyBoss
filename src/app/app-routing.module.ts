@@ -13,6 +13,7 @@ const routes: Routes = [
   { path: 'welcome-add-baby', loadChildren: './welcome-add-baby/welcome-add-baby.module#WelcomeAddBabyPageModule' ,canActivate:[AuthGuard]},
   { path: 'add-first-baby-form', loadChildren: './add-first-baby-form/add-first-baby-form.module#AddFirstBabyFormPageModule',canActivate:[AuthGuard] },
   { path: 'lesson', loadChildren: './lesson/lesson.module#LessonPageModule' },
+  { path: 'privacy', loadChildren: './privacy/privacy.module#PrivacyPageModule' },
   { path: '', loadChildren: './tabs/tabs.module#TabsPageModule' ,canActivate:[AuthGuard], },
 ];
 @NgModule({

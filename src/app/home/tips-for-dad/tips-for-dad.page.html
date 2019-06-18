@@ -8,12 +8,13 @@
 </ion-header>
 
 <ion-content>
-    <ion-card *ngFor="let tipForDad of tipsForDad" routerLink="/tabs/home/tips-for-dad/{{tipForDad.payload.doc.id}}">
-      <ion-card-header>
+    <ion-card *ngFor="let tipForDad of tipsForDad" style="background:white" routerLink="/tabs/home/tips-for-dad/{{tipForDad.payload.doc.id}}">
+      <ion-card-title style="font-size: 22px;">
         {{ tipForDad.payload.doc.data().title }}
-      </ion-card-header>
+      </ion-card-title>
+      <img [src]="tipForDad.payload.doc.data().image">
       <ion-card-content>
-        Content: {{ tipForDad.payload.doc.data().content }}
+        {{ tipForDad.payload.doc.data().content[1] }}
       </ion-card-content>
     </ion-card>
 </ion-content>

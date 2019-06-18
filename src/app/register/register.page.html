@@ -14,7 +14,7 @@
   <form [formGroup]="signupForm" (submit)="emailSignup(signupForm.value)">
     <ion-list class="form-list">
       <ion-item class="email">
-        <ion-label color="primary" stacked>Your Email</ion-label>
+        <ion-label color="primary" stacked>Email</ion-label>
         <ion-input type="email" formControlName="email" clearInput></ion-input>
       </ion-item>
       <div>
@@ -25,7 +25,7 @@
         </ng-container>
       </div>
       <ion-item class="password">
-        <ion-label color="primary" stacked>Your Password</ion-label>
+        <ion-label color="primary" stacked>Password</ion-label>
         <ion-input type="password" formControlName="password" clearInput></ion-input>
       </ion-item>
       <ng-container *ngFor="let validation of validation_messages.password">
@@ -34,8 +34,16 @@
         </div>
       </ng-container>
       <ion-item>
-        <ion-label floating>Agree Terms And Condition</ion-label>
-        <ion-checkbox formControlName="termsAccept"></ion-checkbox>
+        <ion-grid style="color:red; padding:0;">
+          <ion-row style="padding: 0;">
+            <ion-col>
+              <a [routerLink]="'/privacy/'">Agree Privacy And Policy</a>
+            </ion-col>
+            <ion-col size="1" style="padding:0;">
+              <ion-checkbox  style="margin:0;" formControlName="termsAccept"></ion-checkbox>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
       </ion-item>
       <ion-button ion-button expand="block" type="submit" [disabled]="!signupForm.valid">SIGN UP</ion-button>
     </ion-list>
