@@ -3,14 +3,16 @@
     <ion-buttons slot="start">
           <ion-back-button  defaultHref="/tabs/profile"></ion-back-button>
     </ion-buttons>
-    <ion-title>terms-and-condition</ion-title>
+    <ion-title>Terms And Condition</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ul *ngFor="let termsAndCondition of termsAndConditions ">
-    <li>{{termsAndCondition.title}}</li>
-    <li>{{termsAndCondition.content}}</li>
-  </ul>
+  <h1>Terms and conditions</h1>
+  <p>These terms and conditions ("Terms", "Agreement") are an agreement between Mobile Application Developer ("Mobile Application Developer", "us", "we" or "our") and you ("User", "you" or "your"). This Agreement sets forth the general terms and conditions of your use of the Baby Boss mobile application and any of its products or services (collectively, "Mobile Application" or "Services")</p>
+  <div *ngFor="let termsAndCondition of termsAndConditions ">
+    <h2>{{termsAndCondition.title}}</h2>
+    <p>{{termsAndCondition.content}}</p>
+  </div>
 
 </ion-content>

@@ -30,20 +30,22 @@ export class BabyTrackerFeedingDetailPage implements OnInit {
     this.tracker_feeding_form=new FormGroup({
       time:new FormControl(''),
       milk:new FormControl(''),
+      volume:new FormControl(''),
       food:new FormControl(''),
     });
     this.storage.get('babyId').then(val => {
       this.babyId = val
       this.babyTrackerFeeding=this.getBabyTrackerFeedingDetail(this.babyTrackerFeedingId).subscribe(data=>{
         this.babyTrackerFeeding=data;
-        this.updateBabyTrackerFeeding(this.babyTrackerFeeding.time,this.babyTrackerFeeding.milk,this.babyTrackerFeeding.food)
+        this.updateBabyTrackerFeeding(this.babyTrackerFeeding.time,this.babyTrackerFeeding.milk,this.babyTrackerFeeding.volume,this.babyTrackerFeeding.food)
       });
     })
   }
-  updateBabyTrackerFeeding(time, milk,food) {
+  updateBabyTrackerFeeding(time, milk,volume,food) {
     this.tracker_feeding_form.patchValue({
       time: time,
       milk:milk,
+      volume:volume,
       food:food,
     })
   }
@@ -72,8 +74,9 @@ export class BabyTrackerFeedingDetailPage implements OnInit {
     return new Promise<any>((resolve,reject)=>{
       let currentUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("babyFeeding").doc(this.babyTrackerFeedingId).update({
-        time:value.time,
+        time: value.time,
         milk:value.milk,
+        volume:value.volume,
         food:value.food,
       })
       .then((res) => 

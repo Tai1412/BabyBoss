@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class TipsForMomPage implements OnInit {
   public tipsForMom:Array<any>=[];
+  public loadedMomTips:any[];
   constructor(
     private loadingCtrl:LoadingController,
     private firebaseService:TipsForMomServiceService
@@ -20,10 +21,30 @@ export class TipsForMomPage implements OnInit {
       this.showLoading("Loading....")
       .then(()=>{
         this.tipsForMom=data;
+        this.loadedMomTips=data;
         this.loadingCtrl.dismiss();
       })
     });
    
+  }
+  initializeMomTips():void{
+    this.tipsForMom=this.loadedMomTips;//debug , hack
+  }
+  filterMomTips(event){
+    this.initializeMomTips();
+    const searchTerm=event.srcElement.value;
+
+    if(!searchTerm){
+      return; //return nothing if it is empty
+    }
+    this.tipsForMom=this.loadedMomTips.filter(currentMomTips=>{
+      if(currentMomTips.payload.doc.data().title && searchTerm){
+        if(currentMomTips.payload.doc.data().title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1){
+          return true;
+        }
+        return false;
+      }
+    });
   }
   async showLoading(message){
     const loading = await this.loadingCtrl.create({

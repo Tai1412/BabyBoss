@@ -14,83 +14,72 @@
 
 <ion-content>
   <form [formGroup]="updateBabySelectForm">
-      <ion-item lines="none"> 
-          <ion-label>Select</ion-label>
-          <ion-checkbox formControlName="chooseBaby" ></ion-checkbox>
-        </ion-item>
+    <ion-item lines="none">
+      <ion-label>Select</ion-label>
+      <ion-checkbox formControlName="chooseBaby"></ion-checkbox>
+    </ion-item>
   </form>
-      <ion-button ion-button (click)="selectBaby(updateBabySelectForm.value)" [hidden]="!updateBabySelectForm.dirty || !updateBabySelectForm.valid">
-        SAVE
-      </ion-button>
+  <ion-button ion-button (click)="selectBaby(updateBabySelectForm.value)" [hidden]="!updateBabySelectForm.dirty || !updateBabySelectForm.valid">
+    SAVE
+  </ion-button>
   <ion-card>
-  <form [formGroup]="updateBabyForm" (submit)="updateBabySubmit(updateBabyForm.value)">
-    <ion-item lines="none">
-      <ion-label position="stacked" color="primary">Your Baby Name</ion-label>
-      <ion-input type="text" formControlName="name" placeholder="{{baby?.name}}" required></ion-input>
-    </ion-item>
-    <ion-grid>
-      <ion-row>
-        <ion-col>
-    <ion-item lines="none">
-      <ion-label position="stacked" color="primary">Your Baby Age</ion-label>
-      <ion-input type="number" formControlName="age" placeholder="{{baby?.age}}"></ion-input>
-    </ion-item>
-    <div>
-        <ng-container *ngFor="let validation of validation_messages.age">
-          <div class="error-message" *ngIf="updateBabyForm.get('age').hasError(validation.type) && (updateBabyForm.get('age').dirty || updateBabyForm.get('age').touched)">
-            {{ validation.message }}
-          </div>
-        </ng-container>
-      </div>
-    </ion-col>
-    <ion-col>
-    <ion-item lines="none">
-        <ion-label position="stacked" color="primary">Your Baby Age Type</ion-label>
-        <ion-select multiple="false" interface="popover" formControlName="ageType" placeholder="{{baby?.ageType}}">
-            <ion-select-option value="Weeks">Weeks</ion-select-option>
-          <ion-select-option value="Months">Months</ion-select-option>
-          <ion-select-option value="YearsOld">YearsOld</ion-select-option>
+    <form [formGroup]="updateBabyForm" (submit)="updateBabySubmit(updateBabyForm.value)">
+      <ion-item lines="none">
+        <ion-label position="stacked" color="primary">Baby Name</ion-label>
+        <ion-input type="text" formControlName="name" placeholder="{{baby?.name}}" required></ion-input>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="stacked" color="primary">Baby Age</ion-label>
+              <ion-input type="number" formControlName="age" placeholder="{{baby?.age}}"></ion-input>
+            </ion-item>
+            <div>
+              <ng-container *ngFor="let validation of validation_messages.age">
+                <div class="error-message" *ngIf="updateBabyForm.get('age').hasError(validation.type) && (updateBabyForm.get('age').dirty || updateBabyForm.get('age').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="stacked" color="primary">Baby Age Type</ion-label>
+              <ion-select multiple="false" interface="popover" formControlName="ageType" placeholder="{{baby?.ageType}}">
+                <ion-select-option value="Weeks">Weeks</ion-select-option>
+                <ion-select-option value="Months">Months</ion-select-option>
+                <ion-select-option value="YearsOld">YearsOld</ion-select-option>
+              </ion-select>
+            </ion-item>
+            <div>
+              <ng-container *ngFor="let validation of validation_messages.ageType">
+                <div class="error-message" *ngIf="updateBabyForm.get('ageType').hasError(validation.ageType) && (updateBabyForm.get('ageType').dirty || updateBabyForm.get('ageType').touched)">
+                  {{ validation.message }}
+                </div>
+              </ng-container>
+            </div>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item lines="none">
+        <ion-label position="stacked" color="primary">Baby's Gender</ion-label>
+        <ion-select multiple="false" interface="popover" formControlName="gender" placeholder="{{baby?.gender}}">
+          <ion-select-option value="boy">Boy</ion-select-option>
+          <ion-select-option value="girl">Girl</ion-select-option>
         </ion-select>
       </ion-item>
-      <div>
-          <ng-container *ngFor="let validation of validation_messages.ageType">
-            <div class="error-message" *ngIf="updateBabyForm.get('ageType').hasError(validation.ageType) && (updateBabyForm.get('ageType').dirty || updateBabyForm.get('ageType').touched)">
-              {{ validation.message }}
-            </div>
-          </ng-container>
-        </div>
-      </ion-col>
-      </ion-row>
-      </ion-grid>
-    <ion-item lines="none">
-      <ion-label position="stacked" color="primary">Your Baby Gender</ion-label>
-      <ion-select multiple="false" interface="popover" formControlName="gender" placeholder="{{baby?.gender}}">
-        <ion-select-option value="boy">Boy</ion-select-option>
-        <ion-select-option value="girl">Girl</ion-select-option>
-      </ion-select>
-    </ion-item>
-    
-    <ion-button ion-button expand="block" type="submit" [disabled]="!updateBabyForm.valid">Change Baby Detail</ion-button>
-  </form>
+
+      <ion-button ion-button expand="block" type="submit" [disabled]="!updateBabyForm.valid">Change Baby Detail</ion-button>
+    </form>
+  </ion-card>
+  <ion-card style='height:400px; font-size: 20px;'>
+    <ion-card-header>
+      Total Activities Of This Baby
+    </ion-card-header>
+    <ion-card-content>
+      <canvas width="500" height="400"  id="babyActivityChart"></canvas>
+  </ion-card-content>
 </ion-card>
-  <ion-chip color="primary">
-    <ion-icon name="camera"></ion-icon>
-    <ion-label>Baby Memory: {{babyMemoryCount.length}}</ion-label>
-  </ion-chip>
-  <ion-chip color="primary">
-      <ion-icon name="bed"></ion-icon>
-      <ion-label>Baby Sleeping: {{babySleepingCount.length}}</ion-label>
-    </ion-chip>
-    <ion-chip color="primary">
-        <ion-icon name="repeat"></ion-icon>
-        <ion-label>Baby Diaper: {{babyDiaperCount.length}}</ion-label>
-      </ion-chip>
-      <ion-chip color="primary">
-          <ion-icon name="thermometer"></ion-icon>
-          <ion-label>Baby Health Record: {{babyHealthRecordCount.length}}</ion-label>
-        </ion-chip>
-        <ion-chip color="primary">
-            <ion-icon name="restaurant"></ion-icon>
-            <ion-label>Baby Feeding: {{babyFeedingCount.length}}</ion-label>
-          </ion-chip>
+
 </ion-content>

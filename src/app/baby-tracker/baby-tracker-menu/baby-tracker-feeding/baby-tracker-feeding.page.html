@@ -1,27 +1,44 @@
 <ion-header>
   <ion-toolbar>
-      <ion-buttons slot="start">
-          <ion-back-button  defaultHref="tabs/baby-tracker/baby-tracker-menu"></ion-back-button>
-        </ion-buttons>
-    <ion-title>baby-tracker-feeding</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="tabs/baby-tracker/baby-tracker-menu"></ion-back-button>
+    </ion-buttons>
+    <ion-title>Feed Tracker</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
     <form [formGroup]="tracker_feeding_form" (submit)="createBabyTrackerFeeding(tracker_feeding_form.value)">
-        <ion-item>
-            <ion-label position="stacked" color="primary">Time</ion-label>
-            <ion-datetime formControlName="time" display-Format="DD MMMM YYYY hh:mm A">
-            </ion-datetime>
-          </ion-item>
-        <ion-item>
-          <ion-label position="stacked" color="primary">Enter The Amount Of Milk</ion-label>
-          <ion-input type="text" formControlName="milk"></ion-input>
-        </ion-item>
-        <ion-item>
-            <ion-label position="stacked" color="primary">Enter The Type Of Food</ion-label>
-            <ion-input type="text" formControlName="food"></ion-input>
-          </ion-item>
-        <ion-button ion-button block type="submit" [disabled]="!tracker_feeding_form.valid">Add</ion-button>
-      </form>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Time</ion-label>
+        <ion-datetime formControlName="time" display-Format="DD MMMM YYYY hh:mm A" required>
+        </ion-datetime>
+      </ion-item>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-item>
+              <ion-label position="stacked" color="primary">Enter The Amount Of Milk</ion-label>
+              <ion-input type="number" formControlName="milk"></ion-input>
+            </ion-item>
+          </ion-col>
+          <ion-col>
+            <ion-item lines="none">
+              <ion-label position="stacked" color="primary">Milk Volume</ion-label>
+              <ion-select multiple="false" interface="popover" formControlName="volume">
+                <ion-select-option value="Ml">Milliliters</ion-select-option>
+                <ion-select-option value="L">Liters</ion-select-option>
+              </ion-select>
+            </ion-item>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+      <ion-item>
+        <ion-label position="stacked" color="primary">Enter The Type Of Food</ion-label>
+        <ion-input type="text" formControlName="food"></ion-input>
+      </ion-item>
+      <ion-button ion-button expand="block" type="submit" [disabled]="!tracker_feeding_form.valid">Add</ion-button>
+    </form>
+  </ion-card>
 </ion-content>

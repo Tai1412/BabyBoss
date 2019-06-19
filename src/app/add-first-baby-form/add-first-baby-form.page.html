@@ -5,22 +5,23 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
     <form [formGroup]="addFirstBabyForm" (submit)="onSubmit(addFirstBabyForm.value)">
         <ion-item lines="none">
-          <ion-label position="stacked" color="primary">What Is Your's Baby Name</ion-label>
+          <ion-label position="stacked" color="primary">Baby Name</ion-label>
           <ion-input type="text" formControlName="name" required></ion-input>
         </ion-item>
         <ion-grid>
         <ion-row>
           <ion-col>
         <ion-item lines="none">
-          <ion-label position="stacked" color="primary">What Is Your's Baby Age</ion-label>
+          <ion-label position="stacked" color="primary">Baby Age</ion-label>
           <ion-input type="number" formControlName="age" required></ion-input>
         </ion-item>
       </ion-col>
       <ion-col>
         <ion-item lines="none"> 
-            <ion-label position="stacked" color="primary">Your Baby Age Type</ion-label>
+            <ion-label position="stacked" color="primary">Baby Age Type</ion-label>
             <ion-select multiple="false" interface="popover" formControlName="ageType">
                 <ion-select-option value="Weeks">Weeks</ion-select-option>
               <ion-select-option value="Months">Months</ion-select-option>
@@ -31,13 +32,14 @@
           </ion-row>
         </ion-grid>
         <ion-item lines="none">
-            <ion-label position="stacked" color="primary">Select Your Baby's Gender</ion-label>
+            <ion-label position="stacked" color="primary">Baby's Gender</ion-label>
             <ion-select multiple="false" interface="popover" formControlName="gender">
               <ion-select-option value="boy">Boy</ion-select-option>
               <ion-select-option value="girl">Girl</ion-select-option>
             </ion-select>
         </ion-item>
-        <ion-button ion-button block type="submit" [disabled]="!addFirstBabyForm.valid">Add Baby</ion-button>
+        <ion-button ion-button expand="block" type="submit" [disabled]="!addFirstBabyForm.valid">Add Baby</ion-button>
       </form>
-      <ion-button (click)="goToProfilePage()">Go To Your Profile</ion-button>
+    </ion-card>
+      <ion-button expand="block" (click)="goToProfilePage()">Go To Profile</ion-button>
 </ion-content>

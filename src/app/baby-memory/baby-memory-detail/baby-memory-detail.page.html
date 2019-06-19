@@ -21,6 +21,7 @@
     
   </ion-content> -->
   <ion-content>
+      <ion-card>
       <form [formGroup]="baby_memory_form" (submit)="updateBabyMemory(baby_memory_form.value)">
       <ion-list class="form-list">
         <ion-item>
@@ -36,17 +37,29 @@
         </div>
         <img src="{{memory?.imageUrl}}"/>
         <ion-button expand='block' (click)="takeBabyMemoryPicture()">
-            <ion-icon name="images"></ion-icon>
+            <ion-icon class="icon" name="images"></ion-icon>
             Choose from photo
         </ion-button>
         <ion-button expand='block' (click)="takePhotoBabyMemoryPicture()">
-            <ion-icon name="camera"></ion-icon>
+            <ion-icon class="icon" name="camera"></ion-icon>
             Take Pickture
         </ion-button>
         <ion-button ion-button expand="block" type="submit"  [disabled]="!baby_memory_form.valid">Change</ion-button>
       </ion-list>
       </form>
+    </ion-card>
       <img src="{{myPhoto}}"/>
+      <ion-fab vertical="bottom" horizontal="end" slot="fixed" >
+            <ion-fab-button color="secondary">
+              <ion-icon  name="share"></ion-icon>
+            </ion-fab-button>
+            <ion-fab-list side="top">
+              <ion-fab-button (click)="shareViaEmail(memory)" ><ion-icon color="danger" name="mail"></ion-icon></ion-fab-button>
+              <ion-fab-button (click)="shareViaFaceBook(memory)"><ion-icon color="primary" name="logo-facebook"></ion-icon></ion-fab-button>
+              <ion-fab-button (click)="shareViaInstagram(memory)"><ion-icon style="color:#ff0090" name="logo-instagram"></ion-icon></ion-fab-button>
+              <ion-fab-button (click)="shareViaWhatsapp(memory)"><ion-icon  color="success" name="logo-whatsapp"></ion-icon></ion-fab-button>
+            </ion-fab-list>
+          </ion-fab>
       <ion-label class="error-message">{{errorMessage}}</ion-label>
     </ion-content>
   

@@ -137,5 +137,13 @@ export class LoginPage implements OnInit {
     });
     loading.present();
   }
+  logout() {
+    this.fAuthService.logout()
+      .then((res) => {
+        this.showToast("Login Form");
+      }, (error) => {
+        console.log("error", error);
+      });
+  }
 
 }

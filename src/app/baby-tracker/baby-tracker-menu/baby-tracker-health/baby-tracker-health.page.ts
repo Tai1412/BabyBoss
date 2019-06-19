@@ -37,7 +37,7 @@ export class BabyTrackerHealthPage implements OnInit {
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babyHealthRecord").add({
-        time:value.time,
+        time: value.time,
         healthRecord:value.healthRecord
       })
       .then(res=>{

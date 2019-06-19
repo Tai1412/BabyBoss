@@ -24,7 +24,7 @@ export class BabyRecipesDetailPage implements OnInit {
     });
   }
   shareContent(mess){
-    this.socialShare.share(mess.content,this.subject)
+    this.socialShare.share(mess.ingredient,mess.title)
     .then(()=>{
       console.log(" successfully");
     }).catch((error)=>{

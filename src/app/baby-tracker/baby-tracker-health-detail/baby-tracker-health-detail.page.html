@@ -13,6 +13,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
     <form [formGroup]="health_record_form" (submit)="updateHealthBabyRecordSubmit(health_record_form.value)">
         <ion-item>
             <ion-label position="stacked" color="primary">Time</ion-label>
@@ -23,6 +24,7 @@
           <ion-label position="stacked" color="primary">Enter Summary Of Health Record</ion-label>
           <ion-input type="text" formControlName="healthRecord"></ion-input>
         </ion-item>
-        <ion-button ion-button block type="submit" [disabled]="!health_record_form.valid">Update</ion-button>
+        <ion-button ion-button expand="block" type="submit" [disabled]="!health_record_form.valid">Update</ion-button>
       </form>
+    </ion-card>
 </ion-content>

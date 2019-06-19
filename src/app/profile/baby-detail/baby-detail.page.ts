@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Validators, FormBuilder, FormGroup, FormControl } from '@angular/forms';
 import { ToastController, AlertController, LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
+import Chart from 'chart.js';
 
 @Component({
   selector: 'app-baby-detail',
@@ -21,7 +22,7 @@ export class BabyDetailPage implements OnInit {
   updateBabyForm: FormGroup;
   updateBabySelectForm:FormGroup;
   babyMemoryCount: any;
-  babySleepingCount: any;
+  public babySleepingCount:Array<any>=[];;
   babyDiaperCount: any;
   babyHealthRecordCount: any;
   babyFeedingCount: any;
@@ -56,20 +57,24 @@ export class BabyDetailPage implements OnInit {
       this.babyMemoryCount = data;
       console.log(this.babyMemoryCount)
     })
-    this.babySleepingCount = this.firebaseService.getBabySleepById(this.babyId).subscribe(data => {
+    this.firebaseService.getBabySleepById(this.babyId).subscribe(data => {
       this.babySleepingCount = data;
-      console.log(this.babySleepingCount)
+      this.totalBAc();
+      console.log("Sleep count",this.babySleepingCount)
     })
     this.babyDiaperCount = this.firebaseService.getBabyDiaperById(this.babyId).subscribe(data => {
       this.babyDiaperCount = data;
+      this.totalBAc();
       console.log(this.babyDiaperCount)
     })
     this.babyFeedingCount = this.firebaseService.getBabyFeedingrById(this.babyId).subscribe(data => {
       this.babyFeedingCount = data;
+      this.totalBAc();
       console.log(this.babyFeedingCount)
     })
     this.babyHealthRecordCount = this.firebaseService.getBabyHealthRecordById(this.babyId).subscribe(data => {
       this.babyHealthRecordCount = data;
+      this.totalBAc();
       console.log(this.babyHealthRecordCount)
     })
     this.updateBabyForm = this.formBuilder.group({
@@ -86,6 +91,7 @@ export class BabyDetailPage implements OnInit {
   ngOnInit() {
   }
   ionViewWillEnter() {
+
     this.storage.get("babyId").then(val=>{
       this.previousBaby=val
     })
@@ -232,5 +238,36 @@ export class BabyDetailPage implements OnInit {
       ]
     });
     confirm.present();
+  }
+  totalBAc() {
+    var ctx = (<any>document.getElementById('babyActivityChart')).getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart
+        type: 'pie',
+        data: {
+            labels: ["Baby Sleep Track", "Baby Diaper Track", "Baby Feed Track", "Baby Health Track", "Baby Memory"],
+            datasets: [{
+              label: "Baby activity track",
+              backgroundColor: [
+                'rgba(255, 99, 132, 0.2)',
+                'rgba(54, 162, 235, 0.2)',
+                'rgba(255, 206, 86, 0.2)',
+                'rgba(75, 192, 192, 0.2)',
+                'rgba(153, 102, 255, 0.2)',
+                'rgba(255, 159, 64, 0.2)'
+              ],
+              borderColor: [
+                'rgba(255,99,132,1)',
+                'rgba(54, 162, 235, 1)',
+                'rgba(255, 206, 86, 1)',
+                'rgba(75, 192, 192, 1)',
+                'rgba(153, 102, 255, 1)',
+                'rgba(255, 159, 64, 1)'
+              ],
+              data: [(this.babySleepingCount.length),(this.babyDiaperCount.length),(this.babyFeedingCount.length),(this.babyHealthRecordCount.length),(this.babyMemoryCount.length)],
+              borderWidth: 1
+            }]
+       }
+    });
   }
 }

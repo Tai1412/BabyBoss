@@ -18,7 +18,7 @@
     </ion-list-header>
     <ion-card *ngFor="let babyHealthRecord of babyTrackerData1" routerLink="/tabs/baby-tracker/baby-tracker-health/{{babyHealthRecord.payload.doc.id}}" style="background:white">
         <ion-card-header>
-          Time:{{ babyHealthRecord.payload.doc.data().time }}
+          Time:{{ babyHealthRecord.payload.doc.data().time|date:"medium" }}
         </ion-card-header>
         <ion-card-content>
           Health Record: {{ babyHealthRecord.payload.doc.data().healthRecord }}
@@ -30,10 +30,10 @@
         </ion-list-header>
       <ion-card *ngFor="let babySleep of babyTrackerData2" routerLink="/tabs/baby-tracker/baby-tracker-sleep/{{babySleep.payload.doc.id}}" style="background:white">
           <ion-card-header>
-           start Time:{{ babySleep.payload.doc.data().startTime }}
+           start Time:{{ babySleep.payload.doc.data().startTime|date:"medium" }}
           </ion-card-header>
           <ion-card-content>
-            end time: {{ babySleep.payload.doc.data().endTime }}
+            end time: {{ babySleep.payload.doc.data().endTime|date:"medium" }}
           </ion-card-content>
         </ion-card>
     
@@ -42,7 +42,7 @@
           </ion-list-header>
         <ion-card *ngFor="let babyDiaper of babyTrackerData3" routerLink="/tabs/baby-tracker/baby-tracker-diaper/{{babyDiaper.payload.doc.id}}" style="background:white">
             <ion-card-header>
-              Time:{{ babyDiaper.payload.doc.data().time }}
+              Time:{{ babyDiaper.payload.doc.data().time|date:"medium" }}
             </ion-card-header>
             <ion-card-content>
               Status: {{ babyDiaper.payload.doc.data().status }}
@@ -54,10 +54,10 @@
             </ion-list-header>
           <ion-card *ngFor="let babyFeeding of babyTrackerData4" routerLink="/tabs/baby-tracker/baby-tracker-feeding/{{babyFeeding.payload.doc.id}}" style="background:white">
               <ion-card-header>
-                Time:{{ babyFeeding.payload.doc.data().time }}
+                Time:{{ babyFeeding.payload.doc.data().time|date:"medium" }}
               </ion-card-header>
               <ion-card-content>
-                Milk: {{ babyFeeding.payload.doc.data().milk }}
+                Milk: {{ babyFeeding.payload.doc.data().milk }} {{babyFeeding.payload.doc.data().volume}}
               </ion-card-content>
               <ion-card-content>
                 Food: {{ babyFeeding.payload.doc.data().food }}

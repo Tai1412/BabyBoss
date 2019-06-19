@@ -8,6 +8,8 @@
 </ion-header>
 
 <ion-content>
+    <ion-searchbar (ionInput)="filterBabyTips($event)" placeholder="Search By Tip Title" animated></ion-searchbar>
+    <div *ngIf="!babyTips.length==0; else noTip">
     <ion-card *ngFor="let babyTip of babyTips" style="background:white" routerLink="/tabs/home/baby-tips/{{babyTip.payload.doc.id}}">
       <ion-card-title style="font-size: 22px;">
         {{ babyTip.payload.doc.data().title }}
@@ -17,4 +19,13 @@
         {{ babyTip.payload.doc.data().content[1] }}
       </ion-card-content>
     </ion-card>
+    </div>
+    <ng-template #noTip>
+        <ion-item lines="none">
+          <ion-avatar slot="start">
+            <img src="https://www.onlygfx.com/wp-content/uploads/2018/04/no-stamp-2-1024x1024.png">
+          </ion-avatar>
+          <ion-label> No Baby Tips Match</ion-label>
+        </ion-item>
+      </ng-template>
 </ion-content>

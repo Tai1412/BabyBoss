@@ -26,6 +26,7 @@ export class BabyTrackerFeedingPage implements OnInit {
     this.tracker_feeding_form=new FormGroup({
       time:new FormControl(''),
       milk:new FormControl(''),
+      volume:new FormControl(''),
       food:new FormControl(''),
     });
     this.storage.get('babyId').then(val => {
@@ -37,8 +38,9 @@ export class BabyTrackerFeedingPage implements OnInit {
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babyFeeding").add({
-        time:value.time,
+        time: value.time,
         milk:value.milk,
+        volume:value.volume,
         food:value.food
       })
       .then(res=>{

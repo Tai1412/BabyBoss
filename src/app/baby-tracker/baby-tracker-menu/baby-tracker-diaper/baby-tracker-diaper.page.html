@@ -3,15 +3,16 @@
       <ion-buttons slot="start">
           <ion-back-button  defaultHref="tabs/baby-tracker/baby-tracker-menu"></ion-back-button>
         </ion-buttons>
-    <ion-title>baby-tracker-diaper</ion-title>
+    <ion-title>Diaper Tracker</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
     <form [formGroup]="tracker_diaper_form" (submit)="createBabyTrackDiaper(tracker_diaper_form.value)">
         <ion-item>
             <ion-label position="stacked" color="primary">Time</ion-label>
-            <ion-datetime formControlName="time" display-Format="DD MMMM YYYY hh:mm a">
+            <ion-datetime formControlName="time" display-Format="DD MMMM YYYY hh:mm A" required>
             </ion-datetime>
           </ion-item>
         <ion-item>
@@ -21,6 +22,7 @@
               <ion-select-option value="wet">Wet</ion-select-option>
             </ion-select>
         </ion-item>
-        <ion-button ion-button block type="submit" [disabled]="!tracker_diaper_form.valid">Add</ion-button>
+        <ion-button ion-button expand="block" type="submit" [disabled]="!tracker_diaper_form.valid">Add</ion-button>
       </form>
+    </ion-card>
 </ion-content>

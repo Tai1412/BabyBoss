@@ -28,7 +28,7 @@ export class BabyTrackerDiaperPage implements OnInit {
       time:new FormControl(''),
       status:new FormControl(''),
     });
-    this.refreshForm()
+    // this.refreshForm()
     this.storage.get('babyId').then(val => {
       this.babyId = val
     })
@@ -38,7 +38,7 @@ export class BabyTrackerDiaperPage implements OnInit {
     return new Promise<any>((resolve,reject)=>{
       let currenUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babyDiaper").add({
-        time:value.time,
+        time: value.time,
         status:value.status
       })
       .then(res=>{
@@ -56,12 +56,12 @@ export class BabyTrackerDiaperPage implements OnInit {
     });
     toast.present();
   }
-  refreshForm(){
-    this.tracker_diaper_form.patchValue({
-      time:new Date().toDateString(),
-      status:status, // does not work
-  });
-  }
+  // refreshForm(){
+  //   this.tracker_diaper_form.patchValue({
+  //     time:new Date().toDateString(),
+  //     status:status, // does not work
+  // });
+  // }
   async showLoading(message){
     const loading = await this.loadingCtrl.create({
       message: message,

@@ -72,7 +72,7 @@ export class BabyTrackerDiaperDetailPage implements OnInit {
     return new Promise<any>((resolve,reject)=>{
       let currentUser=this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("babyDiaper").doc(this.babyTrackerDiaperId).update({
-        time:value.time,
+        time: value.time,
         status:value.status,
       })
       .then((res) => 

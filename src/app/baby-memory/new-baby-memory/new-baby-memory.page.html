@@ -8,6 +8,7 @@
 </ion-header>
 
 <ion-content>
+  <ion-card>
     <form [formGroup]="baby_memory_form" (submit)="createBabyMemory(baby_memory_form.value)">
     <ion-list class="form-list">
       <ion-item>
@@ -33,6 +34,7 @@
       <ion-button ion-button expand='block' type="submit"  [disabled]="!baby_memory_form.valid">Add</ion-button>
     </ion-list>
     </form>
+  </ion-card>
     
     <ion-label class="error-message">{{errorMessage}}</ion-label>
   </ion-content>

@@ -9,6 +9,7 @@ import { LoadingController } from '@ionic/angular';
 })
 export class TipsForDadPage implements OnInit {
   public tipsForDad:Array<any>=[];
+  public loadedDadTips:any[];
   constructor(
     private loadingCtrl:LoadingController,
     private firebaseService:TipsForDadServiceService
@@ -19,8 +20,28 @@ export class TipsForDadPage implements OnInit {
       this.showLoading("Loading....")
       .then(()=>{
         this.tipsForDad=data;
+        this.loadedDadTips=data;
         this.loadingCtrl.dismiss();
       })
+    });
+  }
+  initializeDadTips():void{
+    this.tipsForDad=this.loadedDadTips;//debug , hack
+  }
+  filterDadTips(event){
+    this.initializeDadTips();
+    const searchTerm=event.srcElement.value;
+
+    if(!searchTerm){
+      return; //return nothing if it is empty
+    }
+    this.tipsForDad=this.loadedDadTips.filter(currentDadTips=>{
+      if(currentDadTips.payload.doc.data().title && searchTerm){
+        if(currentDadTips.payload.doc.data().title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1){
+          return true;
+        }
+        return false;
+      }
     });
   }
   async showLoading(message){

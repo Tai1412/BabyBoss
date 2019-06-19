@@ -7,6 +7,7 @@ import { Camera, CameraOptions } from '@ionic-native/camera/ngx';
 import * as firebase from 'firebase/app';
 import { Storage } from '@ionic/storage';
 import { ToastController, AlertController, LoadingController } from '@ionic/angular';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
 @Component({
   selector: 'app-baby-memory-detail',
@@ -35,6 +36,7 @@ export class BabyMemoryDetailPage implements OnInit {
     private toastCtrl:ToastController,
     private alertCtrl: AlertController,
     private loadingCtrl:LoadingController,
+    private socialShare:SocialSharing,
 
   ) { 
     
@@ -204,5 +206,37 @@ export class BabyMemoryDetailPage implements OnInit {
       ]
     });
     confirm.present();
+  }
+  shareViaFaceBook(mess){
+    this.socialShare.shareViaFacebook(mess.title,mess.imageUrl)
+    .then(()=>{
+      console.log(" successfully");
+    }).catch((error)=>{
+      console.log("failed");
+    })
+  }
+  shareViaInstagram(mess){
+    this.socialShare.shareViaInstagram(mess.title,mess.imageUrl)
+    .then(()=>{
+      console.log(" successfully");
+    }).catch((error)=>{
+      console.log("failed");
+    })
+  }
+  shareViaWhatsapp(mess){
+    this.socialShare.shareViaWhatsApp(mess.title,mess.imageUrl)
+    .then(()=>{
+      console.log(" successfully");
+    }).catch((error)=>{
+      console.log("failed");
+    })
+  }
+  shareViaEmail(mess){
+    this.socialShare.shareViaEmail(mess.title,null,null,null,null,mess.imageUrl)
+    .then(()=>{
+      console.log(" successfully");
+    }).catch((error)=>{
+      console.log("failed");
+    })
   }
 }
