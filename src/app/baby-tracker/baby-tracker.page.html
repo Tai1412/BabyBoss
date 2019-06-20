@@ -75,8 +75,12 @@
 
   
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+      <ion-fab-button class="help"routerLink="/tabs/baby-tracker/baby-tracker-tip" [disabled]="babyId==null">
+        <ion-icon class="icon-fab"name="help"></ion-icon>
+      </ion-fab-button>
     <ion-fab-button routerLink="/tabs/baby-tracker/baby-tracker-menu" [disabled]="babyId==null">
       <ion-icon class="icon-fab"name="add"></ion-icon>
     </ion-fab-button>
+   
   </ion-fab>
 </ion-content>

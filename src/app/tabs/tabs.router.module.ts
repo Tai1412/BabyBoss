@@ -109,6 +109,10 @@ const routes: Routes = [
             path:'baby-tracker-sleep/:SleepId',
             loadChildren:'../baby-tracker/baby-tracker-sleep-detail/baby-tracker-sleep-detail.module#BabyTrackerSleepDetailPageModule'
           },
+          {
+            path:'baby-tracker-tip',
+            loadChildren:'../baby-tracker/baby-tracker-tip/baby-tracker-tip.module#BabyTrackerTipPageModule'
+          },
         ]
       },
       {

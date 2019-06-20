@@ -88,4 +88,5 @@
         <string>need photo library access to get pictures from there</string>
     </edit-config>
     <engine name="ios" spec="4.5.5" />
+    <plugin name="cordova-plugin-printer" spec="0.8.0" />
 </widget>

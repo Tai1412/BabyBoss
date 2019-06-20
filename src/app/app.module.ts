@@ -22,6 +22,7 @@ import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { AngularFirestoreModule } from '@angular/fire/firestore';
 import { AngularFireStorageModule } from '@angular/fire/storage';
+import { Printer } from '@ionic-native/printer/ngx';
 
 
 @NgModule({
@@ -45,7 +46,8 @@ import { AngularFireStorageModule } from '@angular/fire/storage';
     SplashScreen,
     Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    SocialSharing
+    SocialSharing,
+    Printer
   ],
   bootstrap: [AppComponent]
 })
