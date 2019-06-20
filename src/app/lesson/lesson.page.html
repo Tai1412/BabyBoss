@@ -1,12 +1,20 @@
-<ion-slides pager="true" class="container">
-      <ion-slide>
-        <h1>Slide 1</h1>
+<ion-slides pager="true">
+      <ion-slide class="firstStep">
+          <ion-img src="/assets/image/b18.png"></ion-img>
+          <h1>BabyBoss</h1>
+          <h2>We will help you a hand to take care your babies</h2>
+          <p>Slide >>></p>
       </ion-slide>
-      <ion-slide>
-        <h1>Slide 2</h1>
+      <ion-slide class="secondStep">
+          <ion-img src="/assets/image/b15.png"></ion-img>
+          <h1>Tips</h1>
+          <h2>We will help you understand how to take care baby with our tips</h2>
+          <p>Slide >>></p>
       </ion-slide>
-      <ion-slide>
-        <h1>Slide 3</h1>
-        <ion-button (click)="finishLesson()">Discovery</ion-button>
+      <ion-slide class="finalStep">
+              <ion-img src="/assets/image/b19.png"></ion-img>
+            <h1>You and your baby</h1>
+            <h2>Also you can manage your baby activities and your babies memory</h2>
+        <ion-button (click)="finishLesson()">Getting Started</ion-button>
       </ion-slide>
 </ion-slides>

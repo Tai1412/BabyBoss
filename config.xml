@@ -87,6 +87,8 @@
     <edit-config file="*-Info.plist" mode="merge" target="NSPhotoLibraryUsageDescription">
         <string>need photo library access to get pictures from there</string>
     </edit-config>
-    <engine name="ios" spec="4.5.5" />
     <plugin name="cordova-plugin-printer" spec="0.8.0" />
+    <plugin name="cordova-plugin-file" spec="6.0.1" />
+    <plugin name="cordova-plugin-file-opener2" spec="2.2.0" />
+    <engine name="ios" spec="4.5.5" />
 </widget>

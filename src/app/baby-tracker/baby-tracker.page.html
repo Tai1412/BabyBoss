@@ -1,6 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>Baby Tracker</ion-title>
+    <ion-buttons slot="end">
+        <ion-button color="danger" (click)="makePdf()"[disabled]="babyId==null">
+          <ion-icon name="document"></ion-icon>
+        </ion-button>
+      </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -18,10 +23,10 @@
     </ion-list-header>
     <ion-card *ngFor="let babyHealthRecord of babyTrackerData1" routerLink="/tabs/baby-tracker/baby-tracker-health/{{babyHealthRecord.payload.doc.id}}" style="background:white">
         <ion-card-header>
-          Time:{{ babyHealthRecord.payload.doc.data().time|date:"medium" }}
+            <strong>Time:</strong>{{ babyHealthRecord.payload.doc.data().time|date:"medium" }}
         </ion-card-header>
         <ion-card-content>
-          Health Record: {{ babyHealthRecord.payload.doc.data().healthRecord }}
+            <strong>Health Record:</strong> {{ babyHealthRecord.payload.doc.data().healthRecord }}
         </ion-card-content>
       </ion-card>
     
@@ -30,10 +35,13 @@
         </ion-list-header>
       <ion-card *ngFor="let babySleep of babyTrackerData2" routerLink="/tabs/baby-tracker/baby-tracker-sleep/{{babySleep.payload.doc.id}}" style="background:white">
           <ion-card-header>
-           start Time:{{ babySleep.payload.doc.data().startTime|date:"medium" }}
+              <strong>start Time:</strong>{{ babySleep.payload.doc.data().startTime|date:"medium" }}
           </ion-card-header>
           <ion-card-content>
-            end time: {{ babySleep.payload.doc.data().endTime|date:"medium" }}
+              <strong>end time:</strong> {{ babySleep.payload.doc.data().endTime|date:"medium" }}
+          </ion-card-content>
+          <ion-card-content>
+              <strong>Total:</strong> {{ babySleep.payload.doc.data().total|number: '1.0-1' }} Hrs
           </ion-card-content>
         </ion-card>
     
@@ -42,10 +50,10 @@
           </ion-list-header>
         <ion-card *ngFor="let babyDiaper of babyTrackerData3" routerLink="/tabs/baby-tracker/baby-tracker-diaper/{{babyDiaper.payload.doc.id}}" style="background:white">
             <ion-card-header>
-              Time:{{ babyDiaper.payload.doc.data().time|date:"medium" }}
+                <strong>Time:</strong>{{ babyDiaper.payload.doc.data().time|date:"medium" }}
             </ion-card-header>
             <ion-card-content>
-              Status: {{ babyDiaper.payload.doc.data().status }}
+                <strong>Status:</strong> {{ babyDiaper.payload.doc.data().status }}
             </ion-card-content>
           </ion-card>
     
@@ -54,13 +62,13 @@
             </ion-list-header>
           <ion-card *ngFor="let babyFeeding of babyTrackerData4" routerLink="/tabs/baby-tracker/baby-tracker-feeding/{{babyFeeding.payload.doc.id}}" style="background:white">
               <ion-card-header>
-                Time:{{ babyFeeding.payload.doc.data().time|date:"medium" }}
+                  <strong>Time:</strong>{{ babyFeeding.payload.doc.data().time|date:"medium" }}
               </ion-card-header>
               <ion-card-content>
-                Milk: {{ babyFeeding.payload.doc.data().milk }} {{babyFeeding.payload.doc.data().volume}}
+                  <strong>Milk:</strong> {{ babyFeeding.payload.doc.data().milk }} {{babyFeeding.payload.doc.data().volume}}
               </ion-card-content>
               <ion-card-content>
-                Food: {{ babyFeeding.payload.doc.data().food }}
+                  <strong>Food:</strong> {{ babyFeeding.payload.doc.data().food }}
               </ion-card-content>
             </ion-card>
   </div>
@@ -75,7 +83,7 @@
 
   
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
-      <ion-fab-button class="help"routerLink="/tabs/baby-tracker/baby-tracker-tip" [disabled]="babyId==null">
+      <ion-fab-button color="danger" class="help"routerLink="/tabs/baby-tracker/baby-tracker-tip" >
         <ion-icon class="icon-fab"name="help"></ion-icon>
       </ion-fab-button>
     <ion-fab-button routerLink="/tabs/baby-tracker/baby-tracker-menu" [disabled]="babyId==null">

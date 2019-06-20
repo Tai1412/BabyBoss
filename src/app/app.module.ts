@@ -3,7 +3,8 @@ import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import { environment } from '../environments/environment';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { SocialSharing } from '@ionic-native/social-sharing/ngx';
+import { File } from '@ionic-native/file/ngx';
+import { FileOpener } from '@ionic-native/file-opener/ngx';
 
 
 import { IonicStorageModule } from '@ionic/storage';
@@ -12,6 +13,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import {HttpClientModule} from '@angular/common/http';
 import { Camera } from '@ionic-native/camera/ngx';
+import { SocialSharing } from '@ionic-native/social-sharing/ngx';
 
  
 import { AppRoutingModule } from './app-routing.module';
@@ -47,7 +49,9 @@ import { Printer } from '@ionic-native/printer/ngx';
     Camera,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
     SocialSharing,
-    Printer
+    Printer,
+    File,
+    FileOpener
   ],
   bootstrap: [AppComponent]
 })

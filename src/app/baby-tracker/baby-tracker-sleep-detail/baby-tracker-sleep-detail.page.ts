@@ -74,6 +74,7 @@ export class BabyTrackerSleepDetailPage implements OnInit {
       this.afs.collection('User').doc(currentUser.uid).collection('Baby').doc(this.babyId).collection("babySleep").doc(this.babyTrackerSleepId).update({
         startTime: value.startTime,
         endTime:value.endTime,
+        total:(new Date(value.endTime).getTime()-new Date(value.startTime).getTime())/3600000,
       })
         .then((res) => {
           this.router.navigate(['/tabs/baby-tracker']);

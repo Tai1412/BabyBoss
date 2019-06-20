@@ -41,7 +41,8 @@ export class BabyTrackerSleepPage implements OnInit {
       let currenUser = this.afAuth.auth.currentUser;
       this.afs.collection('User').doc(currenUser.uid).collection('Baby').doc(this.babyId).collection("babySleep").add({
         startTime:value.startTime,
-        endTime:value.endTime
+        endTime:value.endTime,
+        total:(new Date(value.endTime).getTime()-new Date(value.startTime).getTime())/3600000,
       })
         .then(res => {
           this.loadingCtrl.dismiss();
