@@ -23,8 +23,8 @@ export class BabyRecipesDetailPage implements OnInit {
       this.recipe=data;
     });
   }
-  shareContent(mess){
-    this.socialShare.share(mess.ingredient,mess.title)
+  shareContent(){
+    this.socialShare.shareViaEmail(JSON.stringify((this.recipe),['title', 'time', 'age', 'ingredients','method'], 1).replace(/[\[\]\{\}]+/g, "").replace(/[\[\]"]+/g, ""),"BabyBoss Recipe",null)
     .then(()=>{
       console.log(" successfully");
     }).catch((error)=>{
